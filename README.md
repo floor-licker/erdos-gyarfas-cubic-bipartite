@@ -63,9 +63,10 @@ and resource use.
 
 ## Project information
 
-Julius Tranquilli is the sole author of the paper. OpenAI ChatGPT and OpenAI
-Codex materially assisted the research, implementation, audit, and writing;
-see [`PROVENANCE.md`](PROVENANCE.md).
+Julius Tranquilli is the sole author of the paper. OpenAI ChatGPT, OpenAI
+Codex, and a custom closed-source coding/formalization harness built on a
+fork of Codex materially assisted the research, implementation, audit, and
+writing; see [`PROVENANCE.md`](PROVENANCE.md).
 
 Code is MIT-licensed, machine-readable data is CC0, documentation is
 CC BY 4.0, and the paper remains copyright Julius Tranquilli. See

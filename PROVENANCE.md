@@ -24,12 +24,19 @@ OpenAI Codex subsequently assisted by:
   tamper tests; and
 - drafting and editing the manuscript, documentation, and public release.
 
-Both systems generated or modified portions of code and text and invoked
-commands through local tool interfaces. The early package does not preserve
-enough turn-level history for reliable line-by-line attribution.
+A custom closed-source coding/formalization harness built on a fork of Codex
+was also used during the later research and verification work. It provided
+an agentic environment for portions of the coding, mathematical
+formalization, artifact audit, and tool-driven checks. The harness is not
+included in this public artifact and is not treated as independent evidence.
 
-AI systems are tools rather than authors and cannot accept responsibility.
-The retained source, exact outputs, certificates, cross-checks, and
-mathematical arguments—not AI testimony—are the evidence for the result.
-This record should be updated if later releases receive material additional
-human or AI contributions.
+Work performed through ChatGPT, Codex, and the custom harness generated or
+modified portions of code and text and invoked commands through local tool
+interfaces. The early package does not preserve enough turn-level history
+for reliable line-by-line attribution.
+
+These systems are tools rather than authors and cannot accept responsibility.
+The retained public source, exact outputs, certificates, cross-checks, and
+mathematical arguments—not AI testimony or the closed-source harness—are the
+evidence for the result. This record should be updated if later releases
+receive material additional human or AI contributions.
