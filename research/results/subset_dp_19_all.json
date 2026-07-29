@@ -1,0 +1,906 @@
+{
+  "records": [
+    {
+      "configuration": 1,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 2,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 3,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 4,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 5,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 6,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 7,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 8,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 9,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 10,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 11,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 12,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 13,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 14,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 15,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 16,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 17,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 18,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 19,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 20,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 21,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 22,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 23,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 24,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 25,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 26,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 27,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 28,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 29,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 30,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 31,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 32,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 33,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 34,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 35,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 36,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 37,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 38,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 39,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 40,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 41,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 42,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 43,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 44,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 45,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 46,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 47,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 48,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 49,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 50,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 51,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 52,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 53,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 54,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 55,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 56,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 57,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 58,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 59,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 60,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 61,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 62,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 63,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 64,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 65,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 66,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 67,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 68,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 69,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 70,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 71,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 72,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 73,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 74,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 75,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 76,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 77,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 78,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 79,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 80,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 81,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 82,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 83,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 84,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 85,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 86,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 87,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 88,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 89,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 90,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 91,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 92,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 93,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 94,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 95,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 96,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 97,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 98,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 99,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 100,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 101,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 102,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 103,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 104,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 105,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 106,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 107,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 108,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 109,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 110,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 111,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 112,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 113,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 114,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 115,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 116,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 117,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 118,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 119,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 120,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 121,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 122,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 123,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 124,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 125,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 126,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 127,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    },
+    {
+      "configuration": 128,
+      "has_C16": true,
+      "has_C4": false,
+      "has_C8": false,
+      "v": 19
+    }
+  ],
+  "summary": {
+    "all_avoid_C4_C8": true,
+    "all_contain_C16": true,
+    "configurations_verified": 128,
+    "method": "exact subset-state transfer DP"
+  }
+}

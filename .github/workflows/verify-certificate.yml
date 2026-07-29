@@ -1,0 +1,31 @@
+name: Verify certificate
+
+"on":
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-certificate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the exact revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+
+      - name: Verify tracked-file manifest
+        run: make verify-manifest
+
+      - name: Verify all 66 theorem-supporting streams and tamper tests
+        run: make verify-certificate
+
+      - name: Validate retained paper data
+        run: make validate-paper-data

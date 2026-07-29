@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: >-
+  If you use this artifact, please cite the paper as the preferred citation
+  and archive the exact repository release used.
+title: >-
+  Code and certificates for a 60-vertex lower bound on cubic bipartite
+  Erdős–Gyárfás counterexamples
+type: software
+authors:
+  - family-names: Tranquilli
+    given-names: Julius
+    email: jtranqs@gmail.com
+repository-code: https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite
+version: 1.0.0-rc1
+keywords:
+  - Erdős–Gyárfás conjecture
+  - graph theory
+  - cubic bipartite graphs
+  - computer-assisted proof
+  - exhaustive search
+  - symmetric configurations
+  - reproducible research
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Tranquilli
+      given-names: Julius
+  title: >-
+    A 60-Vertex Lower Bound for Cubic Bipartite Counterexamples to the
+    Erdős–Gyárfás Conjecture
+  year: 2026
+  url: >-
+    https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/blob/main/paper/Tranquilli_2026_Erdos-Gyarfas_60-Vertex_Lower_Bound.pdf

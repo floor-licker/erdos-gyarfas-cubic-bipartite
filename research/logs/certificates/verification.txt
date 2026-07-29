@@ -1,0 +1,4 @@
+VERIFIED: 66 witness streams exhaust every normalized root orbit for v=7,...,29.
+VERIFIED: all proof-stream totals match frontier_counts.tsv and all completion counts are zero.
+VERIFIED: the compatibility stream reproduces the former v=16 C4/C8 certificate counters.
+VERIFIED: malformed, truncated, trailing, counter-tampered, C8-witness-tampered, C16-witness-tampered, and unexpected-completion streams are rejected.
