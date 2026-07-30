@@ -25,6 +25,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{certifiedlemma}{Certified finite lemma}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
@@ -194,6 +195,24 @@ Second, a rooted restricted-growth rule is proved complete for all connected
 candidates.  Finally, exact implementations enumerate this search tree and
 return zero completions for every side size through \(29\).
 
+\paragraph{Conceptual reduction.}
+An elementary cubic Moore-bound observation suggests a shorter route that is
+not used by the certified search.  If a cubic bipartite graph on at most
+\(58\) vertices has no \(C_4,C_6,\) or \(C_8\), then its girth is at least
+\(10\).  The two nonbacktracking trees of depth four rooted at the endpoints
+of an edge would therefore contain
+\[
+  2(1+2+4+8+16)=62
+\]
+distinct vertices, a contradiction.  Thus a hypothetical graph in the range
+of Theorem~\ref{thm:main} with no \(C_4,C_8,\) or \(C_{16}\) must contain a
+\(C_6\).  Under the incidence translation, it is consequently enough to
+exclude connected linear symmetric \(v_3\)-configurations with \(v\leq29\)
+that contain a Berge triangle but no Berge cycle of length \(4\) or \(8\).
+The certified computation below proves the stronger result obtained by
+omitting the Berge-triangle hypothesis.  This observation does not define or
+alter the retained search tree, counters, or certificate.
+
 \section{Incidence configurations and cycle translations}
 
 Let \(G=(X,Y;E)\) be a connected simple cubic bipartite graph.  As in the
@@ -253,6 +272,12 @@ linear triple systems.  These are the symmetric combinatorial
 exactly the cubic bipartite graphs of girth at least six
 \cite{BettenBrinkmannPisanski2000,Boben2007}.
 
+A Berge cycle of length \(k\geq3\) consists of distinct blocks
+\(B_0,\ldots,B_{k-1}\) and distinct points \(p_0,\ldots,p_{k-1}\) with
+\(p_i\in B_i\cap B_{i+1}\), where indices are read modulo \(k\).
+Equivalently, it is a simple \(C_{2k}\) in the Levi graph; in particular, a
+\(C_6\) is a Berge triangle.
+
 \begin{lemma}[\(C_8\)]\label{lem:c8}
 In a linear triple system, the incidence graph contains a simple \(8\)-cycle
 if and only if there are four distinct blocks
@@ -299,46 +324,6 @@ Because \(P\) is simple and \(b\) is new, this cycle is simple.
 The statement allows one or two members of \(B\) to be newly introduced
 points.  Such a point has degree zero in \(H\), so it cannot be an endpoint of
 an old nontrivial path; the equivalence remains valid without a special case.
-
-\medskip
-\noindent\textbf{A triangle-rooted reformulation.}
-There is a clean preliminary reduction that is not needed by the present
-search.  Suppose that a simple cubic bipartite graph \(G\) on at most \(58\)
-vertices has no \(C_4,C_8,\) or \(C_{16}\), and choose a connected component
-\(K\).  If \(K\) also had no \(C_6\), then its girth would be at least \(10\).
-Fix an edge \(uv\).  Starting from \(u\), but not using \(uv\), expose the
-nonbacktracking cubic tree through depth four.  Its level sizes are
-\[
-  1,2,4,8,16.
-\]
-The same exposure from \(v\) has the same sizes.  A repeated vertex within
-one exposure would give a cycle of length at most \(8\); an intersection
-between the two exposures, together with \(uv\), would likewise give a cycle
-of length at most \(8\).  Hence all exposed vertices are distinct, and the
-edge-rooted Moore count gives
-\[
-  |V(K)|\geq 2(1+2+4+8+16)=62,
-\]
-contrary to \(|V(K)|\leq |V(G)|\leq58\).  Thus every hypothetical graph in
-the verified range contains a \(C_6\).
-
-Write \(v=|V(K)|/2\leq29\).  Under Proposition~\ref{prop:incidence}, a
-\(C_6\) is a Berge triangle.  More generally, for \(k\geq3\), a simple
-\(C_{2k}\) in the incidence graph is a Berge cycle of length \(k\); in
-particular, \(C_8\) and \(C_{16}\) correspond to Berge cycles of lengths
-\(4\) and \(8\).  It is therefore enough to establish the following finite
-statement:
-\begin{quote}
-\emph{Every connected linear \(3\)-uniform, \(3\)-regular hypergraph on at
-most \(29\) points that contains a Berge triangle also contains a Berge
-cycle of length \(4\) or \(8\).}
-\end{quote}
-The certified computation below proves the stronger statement without
-assuming a Berge triangle: it roots at an arbitrary point and excludes every
-connected linear candidate with no Berge cycle of length \(4\) or \(8\).
-Thus this reformulation offers a shorter conceptual route to the theorem but
-does not alter the retained search, counters, or certificate.
-\medskip
 
 \section{Complete rooted restricted-growth generation}
 
@@ -681,6 +666,23 @@ streaming checker, verifies all \(66\) full-range certificate streams, and
 requires their per-side-size totals to equal
 Table~\ref{tab:frontier-counts}. Proposition~\ref{prop:certificate} converts
 those accepted streams into a certificate of zero completed leaves.
+\end{proof}
+
+\begin{certifiedlemma}
+Every connected linear \(3\)-uniform, \(3\)-regular hypergraph on at most
+\(29\) points that contains a Berge triangle also contains a Berge cycle of
+length \(4\) or \(8\).
+\end{certifiedlemma}
+
+\begin{proof}
+For fewer than \(7\) points, linearity at any point would require the six
+other points occurring in its three incident blocks to be distinct, which is
+impossible.  For \(7\leq v\leq29\), a counterexample would correspond to a
+completed branch of the restricted-growth search by
+Proposition~\ref{prop:complete} and Lemma~\ref{lem:leaf}, contradicting
+Proposition~\ref{prop:computation}.  The argument does not use the
+Berge-triangle hypothesis, so the certified computation proves the stated
+lemma as a special case of its stronger conclusion.
 \end{proof}
 
 \begin{proof}[Computer-assisted proof of Theorem~\ref{thm:main}]
