@@ -13,6 +13,9 @@ on 60 vertices or prove the full conjecture.
 Review artifact:
 [`v1.0.0-rc1`](https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1).
 
+Preprint DOI:
+[`10.5281/zenodo.21695513`](https://doi.org/10.5281/zenodo.21695513).
+
 ## Verify
 
 With Python 3 and a C++17 compiler:
@@ -75,6 +78,6 @@ Code is MIT-licensed, machine-readable data is CC0, documentation is
 CC BY 4.0, and the paper remains copyright Julius Tranquilli. See
 [`LICENSES/README.md`](LICENSES/README.md).
 
-Citation metadata is in [`CITATION.cff`](CITATION.cff). Cite the immutable
-review release `v1.0.0-rc1`; the final `v1.0.0` release is intended to
-receive a Zenodo DOI after external feedback.
+Citation metadata is in [`CITATION.cff`](CITATION.cff). Cite the paper using
+the preprint DOI above and identify the computational artifact by its
+immutable review release, `v1.0.0-rc1`.

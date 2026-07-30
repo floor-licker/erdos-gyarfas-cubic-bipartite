@@ -31,5 +31,5 @@ preferred-citation:
     A 60-Vertex Lower Bound for Cubic Bipartite Counterexamples to the
     Erdős–Gyárfás Conjecture
   year: 2026
-  url: >-
-    https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/download/v1.0.0-rc1/Tranquilli_2026_Erdos-Gyarfas_60-Vertex_Lower_Bound.pdf
+  doi: 10.5281/zenodo.21695513
+  url: https://doi.org/10.5281/zenodo.21695513
