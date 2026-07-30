@@ -41,7 +41,9 @@ Counterexamples to the Erd\H{o}s--Gy\'arf\'as Conjecture}
 \author{Julius Tranquilli\\
 \small Independent researcher\\
 \small\href{mailto:jtranqs@gmail.com}{\texttt{jtranqs@gmail.com}}}
-\date{29 July 2026}
+\date{29 July 2026\\[0.5ex]
+\small\href{https://doi.org/10.5281/zenodo.21695514}
+{\texttt{DOI: 10.5281/zenodo.21695514}}}
 
 \begin{document}
 \maketitle
@@ -832,18 +834,21 @@ unpublished computations, private censuses, or uncatalogued code may exist.
 
 \subsection{Artifact availability}
 
-The public computational artifact accompanying this paper is available from the
+The preprint is archived on Zenodo at
+\href{https://doi.org/10.5281/zenodo.21695514}
+{\code{DOI: 10.5281/zenodo.21695514}}. The archived Zenodo record is version
+\code{v1.0.0}. The public computational artifact, including source code,
+witness certificates, verification programs, logs, and reproduction
+instructions, is available from the accompanying
 \href{https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite}
-{public GitHub repository}. The public review artifact is
+{GitHub repository}. The immutable public review artifact is
 \href{https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1}
 {release \code{v1.0.0-rc1}}; its annotated Git tag records the corresponding
-full commit SHA. After external feedback, the final \code{v1.0.0} release is
-intended to receive a Zenodo DOI. The repository-root
-\path{SHA256SUMS} covers every tracked snapshot file other than the manifest
-itself. \path{README.md},
-\path{REPRODUCTION.md}, and \path{PROVENANCE.md} describe the layout,
-commands, and research provenance. The certificate directory contains the
-full-range witness bundle, detached digest, metadata, and byte-level format
+full commit SHA. The repository-root \path{SHA256SUMS} covers every tracked
+snapshot file other than the manifest itself. \path{README.md},
+\path{REPRODUCTION.md}, and \path{PROVENANCE.md} describe the layout, commands,
+and research provenance. The certificate directory contains the full-range
+witness bundle, detached digest, metadata, and byte-level format
 specification. The generator and streaming checker are retained under
 \path{research/src/}; checked-in tests construct the stream mutations at run
 time.
