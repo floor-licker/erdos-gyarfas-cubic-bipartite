@@ -21,20 +21,20 @@ The fixed header is 60 bytes:
 | Offset | Width | Meaning |
 | ---: | ---: | --- |
 | 0 | 8 | ASCII magic `EG58CER1` |
-| 8 | 1 | side size \(v\), from 7 through 29 |
+| 8 | 1 | side size $v$, from 7 through 29 |
 | 9 | 1 | root orbit: 1, 2, or 3; 0 only for the compatibility stream |
-| 10 | 1 | cycle flags: bit 0 enables \(C_8\), bit 1 enables \(C_{16}\) |
+| 10 | 1 | cycle flags: bit 0 enables $C_8$, bit 1 enables $C_{16}$ |
 | 11 | 1 | reserved; must be zero |
 | 12 | 8 | states |
 | 20 | 8 | attempted candidates |
 | 28 | 8 | structural/pair rejections |
-| 36 | 8 | \(C_8\) rejections |
-| 44 | 8 | \(C_{16}\) rejections |
+| 36 | 8 | $C_8$ rejections |
+| 44 | 8 | $C_{16}$ rejections |
 | 52 | 8 | completed configurations |
 
 The theorem-supporting streams require flags `0x03`. Root orbit 1 is
-available for every supported side, orbit 2 requires \(v\geq8\), and orbit 3
-requires \(v\geq9\). Orbit 0 is reserved for the side-16 compatibility
+available for every supported side, orbit 2 requires $v\geq8$, and orbit 3
+requires $v\geq9$. Orbit 0 is reserved for the side-16 compatibility
 stream and requires flags `0x01`.
 
 Header counters are claims, not trusted input. A verifier must recompute and
@@ -42,7 +42,7 @@ compare them after checking the proof.
 
 ## Initial state
 
-Point labels range from 0 through \(v-1\). The verifier installs the rooted
+Point labels range from 0 through $v-1$. The verifier installs the rooted
 star, in this order:
 
 ```text
@@ -60,7 +60,7 @@ orbit 3: {1,7,8}
 ```
 
 The compatibility orbit starts from only the rooted star and invokes the
-unreduced-root, \(C_8\)-only traversal.
+unreduced-root, $C_8$-only traversal.
 
 ## Deterministic candidate traversal
 
@@ -68,13 +68,13 @@ At each recursive state:
 
 1. Increment the state counter.
 2. Advance to the least introduced point `p` whose degree is below three.
-3. If `p == v` and exactly \(v\) blocks are installed, reject the
+3. If `p == v` and exactly $v$ blocks are installed, reject the
    certificate because it expanded to a complete configuration.
 4. Form the ordered `possible` list from:
    - old labels `q > p` having degree below three and not already paired with
      `p`;
-   - the next fresh label, when below \(v\); and
-   - the following fresh label, when below \(v\).
+   - the next fresh label, when below $v$; and
+   - the following fresh label, when below $v$.
 5. Enumerate index pairs from that list in lexicographic order.
 6. Disallow use of the second fresh label unless the first fresh label is in
    the same proposed block.
@@ -89,16 +89,16 @@ increments the structural counter, and consumes no proof byte.
 
 A structurally valid candidate consumes one record.
 
-### `0x08`: \(C_8\) rejection
+### `0x08`: $C_8$ rejection
 
 The tag is followed by three one-byte indices into the current ordered block
 list. The three indices must be distinct and in range. Together with the
 candidate, the four blocks must meet consecutively in four distinct points.
-This is the Berge quadrilateral witnessing a simple \(C_8\).
+This is the Berge quadrilateral witnessing a simple $C_8$.
 
 Total width: 4 bytes.
 
-### `0x10`: \(C_{16}\) rejection
+### `0x10`: $C_{16}$ rejection
 
 The tag is followed by:
 
@@ -118,7 +118,7 @@ must contain the stated start point, the last must contain the finish point,
 and consecutive old blocks must meet in six distinct intermediate points.
 Together with the endpoints, these eight point vertices must all be
 distinct. The record therefore describes a simple old 14-edge incidence
-path, which the new block closes to a simple \(C_{16}\).
+path, which the new block closes to a simple $C_{16}$.
 
 Total width: 9 bytes.
 

@@ -4,7 +4,9 @@ export SOURCE_DATE_EPOCH ?= 1785283200
 export FORCE_SOURCE_DATE ?= 1
 
 .PHONY: all paper build-paper tables validate-paper-data
-.PHONY: verify-certificate verify-certificates generate-certificates
+.PHONY: verify-certificate verify-certificates verify-arbitrary-certificate
+.PHONY: verify-triangle verify-triangle-certificate verify-triangle-search
+.PHONY: generate-certificates
 .PHONY: reproduce-search verify-full verify-v29 verify-transcripts
 .PHONY: verify-positive compare-genbg verify-genbg verify-unreduced
 .PHONY: verify-all manifest verify-manifest clean-paper
@@ -24,10 +26,21 @@ build-paper: paper
 validate-paper-data:
 	$(PYTHON) research/scripts/validate_report_data.py
 
-verify-certificate: verify-certificates
+verify-certificate: verify-triangle-certificate
 
-verify-certificates:
+verify-triangle:
+	$(PYTHON) research/scripts/reproduce_triangle_rooted.py all
+
+verify-triangle-certificate:
+	$(PYTHON) research/scripts/reproduce_triangle_rooted.py certificate
+
+verify-triangle-search:
+	$(PYTHON) research/scripts/reproduce_triangle_rooted.py search
+
+verify-arbitrary-certificate:
 	$(PYTHON) research/scripts/reproduce_witness_certificates.py verify
+
+verify-certificates: verify-triangle-certificate verify-arbitrary-certificate
 
 generate-certificates:
 	$(PYTHON) research/scripts/reproduce_witness_certificates.py generate
@@ -54,7 +67,8 @@ verify-genbg:
 verify-unreduced:
 	$(PYTHON) research/scripts/verify_unreduced_root_counts.py
 
-verify-all: verify-manifest verify-certificates verify-full verify-v29
+verify-all: verify-manifest verify-certificates verify-triangle-search
+verify-all: verify-full verify-v29
 verify-all: verify-transcripts verify-positive verify-genbg verify-unreduced
 verify-all: validate-paper-data paper
 

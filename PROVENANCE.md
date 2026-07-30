@@ -27,8 +27,18 @@ OpenAI Codex subsequently assisted by:
 A custom closed-source coding/formalization harness built on a fork of Codex
 was also used during the later research and verification work. It provided
 an agentic environment for portions of the coding, mathematical
-formalization, artifact audit, and tool-driven checks. The harness is not
-included in this public artifact and is not treated as independent evidence.
+formalization, artifact audit, and tool-driven checks, including development
+of the triangle-rooted universal search, two-stream certificate, and
+six-kernel classification. The harness is not included in this public
+artifact and is not treated as independent evidence.
+
+On 30 July 2026, the author supplied the triangle-rooted research package
+`eg_triangle_rooted_research_2026-07-30.zip`, with SHA-256
+`d2cb1ec5fb755011e81fc4026e1434fa9b4a8c26458ecdd960dd0600928e9108`.
+Codex checked its manifest, rebuilt and reran its verification from source,
+audited the universal completion semantics, replaced its Bash wrapper with
+the retained Python reproduction command, integrated the primary files, and
+revised the manuscript and public documentation.
 
 Work performed through ChatGPT, Codex, and the custom harness generated or
 modified portions of code and text and invoked commands through local tool

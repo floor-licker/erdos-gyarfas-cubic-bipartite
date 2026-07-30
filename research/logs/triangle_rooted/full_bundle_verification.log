@@ -1,0 +1,27 @@
+VERIFIED EG58TRI1-UNIVERSAL side=29 orbit=1
+states 1405
+attempted 106964
+structural 7184
+C8 63526
+C16 34850
+expanded 1404
+solutions 0
+VERIFIED EG58TRI1-UNIVERSAL side=29 orbit=2
+states 20088
+attempted 1655404
+structural 113012
+C8 1208473
+C16 313832
+expanded 20087
+solutions 0
+VERIFIED exact depth-19 state stream: 337 states
+VERIFIED: 337 depth-19 states map to six color-preserving kernels.
+K1: multiplicity=2 boundary=17 blocked(C4,C8,C16)=(9,23,98) compatible=[(12, 21), (12, 22), (15, 23), (15, 24), (16, 25), (16, 26)]
+K2: multiplicity=20 boundary=18 blocked(C4,C8,C16)=(12,25,111) compatible=[(11, 21), (12, 22), (12, 23), (15, 16), (15, 17)]
+K3: multiplicity=20 boundary=18 blocked(C4,C8,C16)=(12,26,110) compatible=[(11, 13), (16, 24), (16, 25), (17, 26), (17, 27)]
+K4: multiplicity=75 boundary=18 blocked(C4,C8,C16)=(11,25,113) compatible=[(11, 12), (11, 13), (16, 17), (16, 18)]
+K5: multiplicity=200 boundary=19 blocked(C4,C8,C16)=(13,38,118) compatible=[(12, 13), (12, 14)]
+K6: multiplicity=20 boundary=19 blocked(C4,C8,C16)=(13,40,116) compatible=[(12, 13), (12, 14)]
+VERIFIED: every compatible-pair graph is triangle-free; no kernel admits a new block.
+VERIFIED triangle certificate tampering tests
+ALL TRIANGLE-ROOTED CHECKS PASSED

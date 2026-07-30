@@ -1,0 +1,36 @@
+{
+  "bundle": "eg58_triangle_universal_two_streams.zip",
+  "certificate_format": "EG58TRI1",
+  "maximum_side": 29,
+  "universal_completion_detection": true,
+  "proof_certificate_count": 2,
+  "bundle_bytes": 218728,
+  "bundle_sha256": "ce772c8cc5175fa5754129cef95c80a80ac96dec2eccd751c80de5a604e99b67",
+  "raw_bytes": 8247745,
+  "entries": [
+    {
+      "name": "tri_v29_o1.cert",
+      "orbit": 1,
+      "states": 1405,
+      "attempted": 106964,
+      "structural": 7184,
+      "c8": 63526,
+      "c16": 34850,
+      "completions": 0,
+      "raw_bytes": 569218,
+      "raw_sha256": "ebc61e8913c3c28daec2abc30bbcf406d321b4b01a8366f0cab6cbed1881e3c9"
+    },
+    {
+      "name": "tri_v29_o2.cert",
+      "orbit": 2,
+      "states": 20088,
+      "attempted": 1655404,
+      "structural": 113012,
+      "c8": 1208473,
+      "c16": 313832,
+      "completions": 0,
+      "raw_bytes": 7678527,
+      "raw_sha256": "57057675e1621c39f74020c8f3e9cb12b1ebbdf4abbc6ec5d24b28569337b69b"
+    }
+  ]
+}

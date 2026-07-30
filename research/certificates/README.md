@@ -1,32 +1,22 @@
-# Full-range witness certificates
+# Witness certificates
 
-The authoritative bundle is `eg58_witness_certificates.zip`:
+## Triangle-rooted proof
 
-- size: 20,545,969 bytes;
+The primary bundle is `eg58_triangle_universal_two_streams.zip`:
+
+- size: 218,728 bytes;
 - SHA-256:
-  `721221d5d59ceafcb7cfc11ce704e49f17d34586529eb315d800fee6bb1b597e`;
-- format: `EG58CER1`;
-- theorem-supporting streams: 66; and
-- compatibility streams: 1.
+  `ce772c8cc5175fa5754129cef95c80a80ac96dec2eccd751c80de5a604e99b67`;
+- format: `EG58TRI1`; and
+- theorem-supporting streams: 2.
 
-The detached digest is in `eg58_witness_certificates.zip.sha256`.
-`eg58_witness_certificates.json` records every member's size, digest,
-counters, and role.
+The streams represent the two normalized Berge-triangle root orbits. Side
+size 29 is a cap: the checker rejects a completed configuration as soon as
+all introduced points are cubic, including completions on fewer than 29
+points. The two streams therefore cover every $v\leq29$.
 
-## Coverage
-
-For incidence side size \(v\), the graph order is \(2v\). The bundle contains
-the one available root orbit at \(v=7\), two at \(v=8\), and all three at
-every \(v=9,\ldots,29\). These \(1+2+21\cdot3=66\) streams cover the full
-theorem range. The extra side-16 stream is a compatibility check and is not
-needed for the theorem.
-
-Across the 66 streams, the checker reconstructs 1,160,270 states and
-101,430,148 attempted candidates. It validates 66,966,950 \(C_8\) witnesses
-and 26,007,625 \(C_{16}\) witnesses; no branch reaches a completed
-configuration.
-
-## Check
+The detached digest and machine-readable metadata accompany the ZIP. The
+binary format is specified in [`TRIANGLE_FORMAT.md`](TRIANGLE_FORMAT.md).
 
 From the repository root:
 
@@ -34,11 +24,32 @@ From the repository root:
 make verify-certificate
 ```
 
-The separately written checker regenerates states and candidates, validates
-positive cycle witnesses, reconciles all counters, and rejects malformed,
-truncated, trailing, tampered, or unexpectedly completing streams. It does
-not trust a production executable, a production cycle oracle, or stored
-negative cycle assertions.
+This regenerates both raw streams byte-for-byte, verifies every positive
+cycle witness, reconstructs the 337 depth-19 states, checks their explicit
+maps to six kernels, proves each kernel's compatible-pair graph
+triangle-free, and thereby excludes a further block on the existing
+29-point set. It also runs tampering tests.
+
+`eg58_triangle_witness_certificates.zip` contains 45 conventional per-side
+triangle-rooted streams as a cross-check.
+
+## Stronger arbitrary-root cross-check
+
+`eg58_witness_certificates.zip` is the earlier, stronger arbitrary-root
+bundle:
+
+- size: 20,545,969 bytes;
+- SHA-256:
+  `721221d5d59ceafcb7cfc11ce704e49f17d34586529eb315d800fee6bb1b597e`;
+- format: `EG58CER1`; and
+- theorem-supporting streams: 66.
+
+It excludes all connected linear candidates through $v=29$, without
+assuming a Berge triangle. Verify it with:
+
+```sh
+make verify-arbitrary-certificate
+```
 
 To rebuild the bundle:
 
@@ -46,7 +57,7 @@ To rebuild the bundle:
 make generate-certificates
 ```
 
-The remaining trust boundary is the mathematical root normalization and
-restricted-growth coverage proof in Proposition 10; see
-`research/docs/completeness_argument.md`. The implementation-independent
-binary specification is [`FORMAT.md`](FORMAT.md).
+That command rebuilds the arbitrary-root bundle; its format is
+[`FORMAT.md`](FORMAT.md). Both certificate families retain a mathematical
+trust boundary in their root normalization and restricted-growth coverage
+arguments.

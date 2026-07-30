@@ -12,3 +12,5 @@
 *.graph6 binary
 *.pdf binary
 research/certificates/eg58_witness_certificates.zip binary
+research/certificates/eg58_triangle_universal_two_streams.zip binary
+research/certificates/eg58_triangle_witness_certificates.zip binary

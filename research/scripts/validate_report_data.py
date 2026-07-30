@@ -258,6 +258,150 @@ def main() -> None:
             str(entry["name"]) for entry in entries
         }
 
+    triangle_frontier = parse_tsv(
+        ROOT / "research/results/triangle_frontier_counts.tsv"
+    )
+    assert set(triangle_frontier) == set(range(7, 30))
+    assert all(row[-1] == 0 for row in triangle_frontier.values())
+
+    with (ROOT / "research/results/triangle_transcript_hashes.tsv").open(
+        encoding="utf-8", newline=""
+    ) as handle:
+        triangle_transcripts = list(csv.DictReader(handle, delimiter="\t"))
+    assert len(triangle_transcripts) == 46
+    assert {
+        (int(row["v"]), int(row["orbit"])) for row in triangle_transcripts
+    } == {
+        (side, orbit) for side in range(7, 30) for orbit in (1, 2)
+    }
+    assert all(
+        re.fullmatch(r"[0-9a-f]{64}", row["sha256"])
+        for row in triangle_transcripts
+    )
+    for side in range(7, 30):
+        rows = [
+            row for row in triangle_transcripts if int(row["v"]) == side
+        ]
+        assert sum(int(row["states"]) for row in rows) == (
+            triangle_frontier[side][0]
+        )
+        assert sum(int(row["candidates"]) for row in rows) == (
+            triangle_frontier[side][1]
+        )
+
+    triangle_metadata = json.loads(
+        (
+            certificate_root
+            / "eg58_triangle_universal_two_streams.json"
+        ).read_text(encoding="utf-8")
+    )
+    triangle_archive = certificate_root / triangle_metadata["bundle"]
+    assert triangle_metadata["certificate_format"] == "EG58TRI1"
+    assert triangle_metadata["maximum_side"] == 29
+    assert triangle_metadata["universal_completion_detection"] is True
+    assert triangle_metadata["proof_certificate_count"] == 2
+    assert triangle_archive.stat().st_size == triangle_metadata["bundle_bytes"]
+    assert hashlib.sha256(triangle_archive.read_bytes()).hexdigest() == (
+        triangle_metadata["bundle_sha256"]
+    )
+    triangle_entries = triangle_metadata["entries"]
+    assert [int(entry["orbit"]) for entry in triangle_entries] == [1, 2]
+    assert sum(int(entry["raw_bytes"]) for entry in triangle_entries) == (
+        triangle_metadata["raw_bytes"]
+    )
+    triangle_report_orbits = parse_orbit_tex(
+        ROOT / "paper/tables/triangle_orbits.tex"
+    )
+    assert {
+        orbit: triangle_report_orbits[orbit] for orbit in ("1", "2")
+    } == {
+        str(entry["orbit"]): tuple(
+            int(entry[field]) for field in certificate_fields
+        )
+        for entry in triangle_entries
+    }
+    assert triangle_report_orbits["Total"] == triangle_frontier[29]
+    with ZipFile(triangle_archive, "r") as archive:
+        assert set(archive.namelist()) == {
+            str(entry["name"]) for entry in triangle_entries
+        }
+        for entry in triangle_entries:
+            payload = archive.read(str(entry["name"]))
+            assert len(payload) == int(entry["raw_bytes"])
+            assert hashlib.sha256(payload).hexdigest() == entry["raw_sha256"]
+
+    conventional_metadata = json.loads(
+        (
+            certificate_root
+            / "eg58_triangle_witness_certificates.json"
+        ).read_text(encoding="utf-8")
+    )
+    conventional_archive = (
+        certificate_root / "eg58_triangle_witness_certificates.zip"
+    )
+    assert conventional_metadata["format"] == "EG58TRI1"
+    assert conventional_metadata["streams"] == 45
+    assert conventional_archive.stat().st_size == (
+        conventional_metadata["compressed_bytes"]
+    )
+    assert hashlib.sha256(conventional_archive.read_bytes()).hexdigest() == (
+        conventional_metadata["sha256"]
+    )
+    conventional_entries = conventional_metadata["counts"]
+    for side in range(7, 30):
+        side_entries = [
+            entry
+            for entry in conventional_entries
+            if int(entry["v"]) == side
+        ]
+        assert tuple(
+            sum(int(entry[field]) for entry in side_entries)
+            for field in certificate_fields
+        ) == triangle_frontier[side]
+    with ZipFile(conventional_archive, "r") as archive:
+        assert set(archive.namelist()) == {
+            f"tri_v{entry['v']}_o{entry['orbit']}.cert"
+            for entry in conventional_entries
+        }
+
+    kernel_classes = json.loads(
+        (
+            ROOT / "research/results/triangle_kernel_classes.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert [int(entry["class"]) for entry in kernel_classes] == list(
+        range(1, 7)
+    )
+    assert [int(entry["size"]) for entry in kernel_classes] == [
+        2,
+        20,
+        20,
+        75,
+        200,
+        20,
+    ]
+    assert [len(entry["unfinished"]) for entry in kernel_classes] == [
+        17,
+        18,
+        18,
+        18,
+        19,
+        19,
+    ]
+    assert sum(int(entry["size"]) for entry in kernel_classes) == 337
+    depth_states = (
+        ROOT / "research/results/triangle_depth19_states.txt"
+    ).read_text(encoding="utf-8").splitlines()
+    mapping_rows = [
+        row
+        for row in (
+            ROOT
+            / "research/results/triangle_kernel_isomorphism_certificate.txt"
+        ).read_text(encoding="utf-8").splitlines()
+        if row and not row.startswith("#")
+    ]
+    assert len(depth_states) == len(mapping_rows) == 337
+
     print(
         "VERIFIED: report and primary full-range table match both fresh implementations."
     )
@@ -267,6 +411,7 @@ def main() -> None:
     print("VERIFIED: canonical unreduced-root diagnostic table is internally valid.")
     print("VERIFIED: stored genbg canonical-set counts and SHA-256 hashes.")
     print("VERIFIED: full-range certificate metadata and archive member set.")
+    print("VERIFIED: triangle-rooted tables, certificates, and six-kernel data.")
 
 
 if __name__ == "__main__":
