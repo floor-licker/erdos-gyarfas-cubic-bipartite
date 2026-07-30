@@ -11,7 +11,9 @@ authors:
     given-names: Julius
     email: jtranqs@gmail.com
 repository-code: https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite
+url: https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1
 version: 1.0.0-rc1
+date-released: 2026-07-29
 keywords:
   - Erdős–Gyárfás conjecture
   - graph theory
@@ -30,4 +32,4 @@ preferred-citation:
     Erdős–Gyárfás Conjecture
   year: 2026
   url: >-
-    https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/blob/main/paper/Tranquilli_2026_Erdos-Gyarfas_60-Vertex_Lower_Bound.pdf
+    https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/download/v1.0.0-rc1/Tranquilli_2026_Erdos-Gyarfas_60-Vertex_Lower_Bound.pdf

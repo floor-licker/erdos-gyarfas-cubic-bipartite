@@ -25,6 +25,10 @@ First verify the tracked-file manifest:
 make verify-manifest
 ```
 
+In a Git checkout, this also requires the manifest file set to equal
+`git ls-files`. In a downloaded source archive, it validates every
+manifest-listed path and digest without requiring `.git`.
+
 ## Certificate
 
 ```sh

@@ -10,6 +10,9 @@ Consequently, any cubic-bipartite counterexample to the Erdős–Gyárfás
 conjecture has at least 60 vertices. This does not exclude a counterexample
 on 60 vertices or prove the full conjecture.
 
+Review artifact:
+[`v1.0.0-rc1`](https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1).
+
 ## Verify
 
 With Python 3 and a C++17 compiler:
@@ -19,15 +22,15 @@ make verify-certificate
 ```
 
 This checks all 66 normalized root-orbit witness streams for side sizes
-\(v=7,\ldots,29\), their digests and counters, and the certificate-tampering
+$v=7,\ldots,29$, their digests and counters, and the certificate-tampering
 tests. It takes about 16 seconds on the reference machine.
 
 | Claim or check | Status |
 | --- | --- |
-| Orders through 58 contain \(C_4\), \(C_8\), or \(C_{16}\) | Exhaustive computation and full-range witness certificate |
+| Orders through 58 contain a 4-, 8-, or 16-cycle | Exhaustive computation and full-range witness certificate |
 | Counterexample lower bound | 60 vertices |
 | Production implementations | Matching counters and decision transcripts |
-| Different-generator overlap | Exact `genbg` set agreement through \(v=13\) |
+| Different-generator overlap | Exact `genbg` set agreement through $v=13$ |
 | Order 60 | Not claimed |
 
 Certificate verification still relies on the mathematical root normalization
@@ -42,7 +45,7 @@ is in
 | `make verify-certificate` | Verify the static certificate |
 | `make reproduce-search` | Rerun the two principal searches and transcript comparison |
 | `make verify-v29` | Compare all three implementations at the frontier |
-| `make verify-genbg` | Compare canonical graph sets through \(v=13\) |
+| `make verify-genbg` | Compare canonical graph sets through $v=13$ |
 | `make verify-all` | Run the complete audit and rebuild the paper |
 
 See [`REPRODUCTION.md`](REPRODUCTION.md) for requirements, expected behavior,
@@ -72,5 +75,6 @@ Code is MIT-licensed, machine-readable data is CC0, documentation is
 CC BY 4.0, and the paper remains copyright Julius Tranquilli. See
 [`LICENSES/README.md`](LICENSES/README.md).
 
-Citation metadata is in [`CITATION.cff`](CITATION.cff). Until the immutable
-`v1.0.0` release is archived, cite the full `main` commit used.
+Citation metadata is in [`CITATION.cff`](CITATION.cff). Cite the immutable
+review release `v1.0.0-rc1`; the final `v1.0.0` release is intended to
+receive a Zenodo DOI after external feedback.
