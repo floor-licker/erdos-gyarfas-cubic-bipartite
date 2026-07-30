@@ -300,6 +300,46 @@ The statement allows one or two members of \(B\) to be newly introduced
 points.  Such a point has degree zero in \(H\), so it cannot be an endpoint of
 an old nontrivial path; the equivalence remains valid without a special case.
 
+\medskip
+\noindent\textbf{A triangle-rooted reformulation.}
+There is a clean preliminary reduction that is not needed by the present
+search.  Suppose that a simple cubic bipartite graph \(G\) on at most \(58\)
+vertices has no \(C_4,C_8,\) or \(C_{16}\), and choose a connected component
+\(K\).  If \(K\) also had no \(C_6\), then its girth would be at least \(10\).
+Fix an edge \(uv\).  Starting from \(u\), but not using \(uv\), expose the
+nonbacktracking cubic tree through depth four.  Its level sizes are
+\[
+  1,2,4,8,16.
+\]
+The same exposure from \(v\) has the same sizes.  A repeated vertex within
+one exposure would give a cycle of length at most \(8\); an intersection
+between the two exposures, together with \(uv\), would likewise give a cycle
+of length at most \(8\).  Hence all exposed vertices are distinct, and the
+edge-rooted Moore count gives
+\[
+  |V(K)|\geq 2(1+2+4+8+16)=62,
+\]
+contrary to \(|V(K)|\leq |V(G)|\leq58\).  Thus every hypothetical graph in
+the verified range contains a \(C_6\).
+
+Write \(v=|V(K)|/2\leq29\).  Under Proposition~\ref{prop:incidence}, a
+\(C_6\) is a Berge triangle.  More generally, for \(k\geq3\), a simple
+\(C_{2k}\) in the incidence graph is a Berge cycle of length \(k\); in
+particular, \(C_8\) and \(C_{16}\) correspond to Berge cycles of lengths
+\(4\) and \(8\).  It is therefore enough to establish the following finite
+statement:
+\begin{quote}
+\emph{Every connected linear \(3\)-uniform, \(3\)-regular hypergraph on at
+most \(29\) points that contains a Berge triangle also contains a Berge
+cycle of length \(4\) or \(8\).}
+\end{quote}
+The certified computation below proves the stronger statement without
+assuming a Berge triangle: it roots at an arbitrary point and excludes every
+connected linear candidate with no Berge cycle of length \(4\) or \(8\).
+Thus this reformulation offers a shorter conceptual route to the theorem but
+does not alter the retained search, counters, or certificate.
+\medskip
+
 \section{Complete rooted restricted-growth generation}
 
 \subsection{Root normalization}
