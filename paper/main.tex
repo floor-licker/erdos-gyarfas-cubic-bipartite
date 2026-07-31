@@ -766,46 +766,22 @@ bipartite graph on at most \(58\) vertices contains a \(4\)-, \(8\)-, or
 \(16\)-cycle. The lower bound for any cubic bipartite counterexample is
 therefore \(60\).
 
-\section*{Acknowledgements and AI disclosure}
+\section*{AI disclosure}
 
-The author thanks the developers and maintainers of the computational tools
-used in the verification workflow. OpenAI ChatGPT materially assisted the
-initial research process, including proposing computational and structural
-approaches, developing portions of the incidence-based search and
-verification code, running and interpreting computations, drafting
-preliminary mathematical arguments and the proof architecture, and
-conducting an initial literature audit.
-
-OpenAI Codex subsequently assisted with reorganizing and auditing the
-artifact, reproducing computations, implementing additional cross-checks,
-resolving the historical generation-mode discrepancy, removing fixed
-meet-in-the-middle path stores, implementing the decision-transcript audit,
-designing and implementing the full-range witness-certificate generator and
-streaming checker, auditing and integrating the later triangle-rooted
-research package, aligning its generator with universal completion semantics,
-replacing its Bash wrapper with a Python reproduction command, and drafting
-and editing the manuscript and documentation. Codex generated or modified
-portions of the manuscript and auxiliary code and invoked the reported
-reproduction commands in the author's workspace.
-
-A custom closed-source coding/formalization harness built on a fork of Codex
-was also used during the later research and verification work. It provided
-an agentic environment for portions of the coding, mathematical
-formalization, artifact audit, and tool-driven checks, including development
-of the triangle-rooted universal search, two-stream certificate, and
-six-kernel classification. The harness is not included in the public
-artifact and is not treated as independent evidence.
-
-Julius Tranquilli selected the problem and claimed result, directed the scope
-of the work, supplied the original dated package, and accepts responsibility
-for the final claims, code, computations, citations, and text. The
-computations ran in the author's workspace, in many cases through AI tool
-interfaces. The retained code, logs, exact outputs, certificates, and
-mathematical arguments---not an AI assertion---are the evidence reported
-here. Neither the AI systems nor the closed-source harness is an author or
-part of the evidentiary trust base. A fuller activity-level record, including
-the limits of file-level attribution for the early package, is provided in
-\path{PROVENANCE.md}.
+OpenAI ChatGPT materially assisted the initial research, including developing
+computational and structural approaches, portions of the incidence-based code
+and preliminary arguments, running and interpreting computations, and an
+initial literature audit. OpenAI Codex subsequently assisted with code and
+artifact auditing, reproducibility checks, additional verifiers and
+certificates, integration of the triangle-rooted method, and drafting and
+editing the manuscript and documentation. A custom closed-source coding and
+formalization harness built on a fork of Codex also assisted with later code,
+formalization, and verification work; it is not included in the public
+artifact or treated as independent evidence. Julius Tranquilli selected and
+directed the project and accepts responsibility for the final work; the
+retained code, logs, exact outputs, certificates, and mathematical arguments,
+rather than AI assertions, form the evidentiary basis, and a fuller
+activity-level account appears in \path{PROVENANCE.md}.
 
 \clearpage
 \appendix
