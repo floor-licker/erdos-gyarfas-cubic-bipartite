@@ -7,6 +7,8 @@
 \usepackage{booktabs,longtable,tabularx}
 \usepackage{enumitem}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc}
 \usepackage{listings}
 \usepackage{microtype}
 \usepackage{hyperref}
@@ -35,6 +37,18 @@
 \newcommand{\cH}{\mathcal{H}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\code}[1]{\texttt{#1}}
+
+\tikzset{
+  pointnode/.style={circle,draw=blue!55!black,fill=blue!7,
+    minimum size=6.5mm,inner sep=1pt,font=\small},
+  blocknode/.style={rectangle,rounded corners=1.5pt,
+    draw=orange!70!black,fill=orange!10,
+    minimum width=9mm,minimum height=6.5mm,inner sep=1pt,font=\small},
+  cycleedge/.style={very thick,blue!60!black},
+  newedge/.style={very thick,red!70!black},
+  auxiliaryedge/.style={semithick,gray!65},
+  compatnode/.style={circle,fill=blue!65!black,inner sep=1.5pt}
+}
 
 \title{A 60-Vertex Lower Bound for Cubic Bipartite\\
 Counterexamples to the Erd\H{o}s--Gy\'arf\'as Conjecture}
@@ -282,6 +296,44 @@ A Berge cycle of length \(k\geq3\) consists of distinct blocks
 Equivalently, it is a simple \(C_{2k}\) in the Levi graph; in particular, a
 \(C_6\) is a Berge triangle.
 
+\paragraph{Worked example.}
+Take
+\[
+  B_1=\{a,b,c\},\qquad B_2=\{c,d,e\},\qquad
+  B_3=\{e,f,a\}.
+\]
+Their successive intersection points are \(c,e,a\). In the Levi graph these
+incidences form the alternating cycle shown in
+Figure~\ref{fig:incidence-triangle}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.02]
+  \node[pointnode] (a) at (0,1.65) {$a$};
+  \node[blocknode] (B1) at (1.75,0.82) {$B_1$};
+  \node[pointnode] (c) at (1.75,-0.82) {$c$};
+  \node[blocknode] (B2) at (0,-1.65) {$B_2$};
+  \node[pointnode] (e) at (-1.75,-0.82) {$e$};
+  \node[blocknode] (B3) at (-1.75,0.82) {$B_3$};
+
+  \node[pointnode] (b) at (3.05,0.82) {$b$};
+  \node[pointnode] (d) at (0,-2.85) {$d$};
+  \node[pointnode] (f) at (-3.05,0.82) {$f$};
+
+  \draw[cycleedge] (a)--(B1)--(c)--(B2)--(e)--(B3)--cycle;
+  \draw[auxiliaryedge] (B1)--(b);
+  \draw[auxiliaryedge] (B2)--(d);
+  \draw[auxiliaryedge] (B3)--(f);
+\end{tikzpicture}
+\caption{A Berge triangle and its Levi-graph \(C_6\). The blue cycle is
+\(a-B_1-c-B_2-e-B_3-a\); the gray edges show the third point of each block.}
+\label{fig:incidence-triangle}
+\end{figure}
+
+A familiar global example is the Fano plane: its seven points and seven lines
+form a symmetric \(7_3\)-configuration, and its Levi graph is the cubic
+bipartite Heawood graph.
+
 \begin{lemma}[\(C_8\)]\label{lem:c8}
 In a linear triple system, the incidence graph contains a simple \(8\)-cycle
 if and only if there are four distinct blocks
@@ -312,17 +364,34 @@ vertex \(b\) adjacent to the three points in \(B=\{x,y,z\}\).  A new simple
 \(14\) between two distinct members of \(B\).
 \end{lemma}
 
-\begin{proof}
-Any \(C_{16}\) appearing after the augmentation but not before it must contain
-the new vertex \(b\).  A simple cycle uses exactly two of the three edges at
-\(b\).  Delete \(b\) and those two cycle edges.  What remains is a simple
-\(14\)-edge path in \(H\) between the corresponding two distinct members of
-\(B\).
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+  \node[pointnode] (x) at (-3,0) {$x$};
+  \node[pointnode] (y) at (3,0) {$y$};
+  \node[blocknode] (b) at (0,-1.35) {$b$};
+  \node[pointnode] (z) at (0,-2.65) {$z$};
 
-Conversely, let \(P\) be a simple \(14\)-edge path in \(H\) between two
-distinct points \(u,w\in B\).  The new vertex \(b\) does not occur on \(P\).
-Adding the edges \(ub\) and \(bw\) closes \(P\) into a \(16\)-edge cycle.
-Because \(P\) is simple and \(b\) is new, this cycle is simple.
+  \draw[cycleedge] (x) to[bend left=38]
+    node[midway,above=4pt,fill=white,inner sep=2pt,font=\small]
+    {old simple path in \(H\) (\(14\) edges)} (y);
+  \draw[newedge] (x)--(b)--(y);
+  \draw[auxiliaryedge] (b)--(z);
+  \node[font=\small,text=red!70!black] at (0,-0.55)
+    {two new cycle edges};
+\end{tikzpicture}
+\caption{The incremental \(C_{16}\) test. The old \(14\)-edge path and the
+two highlighted edges through the new block vertex \(b\) form a
+\(16\)-cycle. The third incidence \(bz\) is not used by this cycle.}
+\label{fig:c16-oracle}
+\end{figure}
+
+\begin{proof}
+Any newly created \(C_{16}\) must use \(b\) and exactly two of its incident
+edges. Deleting \(b\) from that cycle leaves a simple \(14\)-edge path in
+\(H\). Conversely, adding \(b\) and the two corresponding incidence edges
+closes any such path into a simple \(16\)-cycle, as in
+Figure~\ref{fig:c16-oracle}.
 \end{proof}
 
 The statement allows one or two members of \(B\) to be newly introduced
@@ -370,15 +439,66 @@ Up to the stabilizer of this rooted triangle, the final block through point
 \]
 \end{lemma}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.92]
+  \begin{scope}[shift={(-2.9,0)}]
+    \node[font=\small\bfseries] at (0,2.35) {(a) rooted Berge triangle};
+    \node[pointnode,fill=yellow!22,draw=yellow!55!black] (p0) at (0,1.45) {$0$};
+    \node[blocknode] (T1) at (1.5,0.72) {$T_1$};
+    \node[pointnode,fill=red!8,draw=red!55!black] (p1) at (1.5,-0.72) {$1$};
+    \node[blocknode] (T2) at (0,-1.45) {$T_2$};
+    \node[pointnode,fill=red!8,draw=red!55!black] (p2) at (-1.5,-0.72) {$2$};
+    \node[blocknode] (T3) at (-1.5,0.72) {$T_3$};
+    \node[pointnode,fill=red!8,draw=red!55!black] (p3) at (2.65,0.72) {$3$};
+    \node[pointnode,fill=green!10,draw=green!50!black] (p4) at (0,-2.55) {$4$};
+    \node[pointnode,fill=red!8,draw=red!55!black] (p5) at (-2.65,0.72) {$5$};
+
+    \draw[cycleedge] (p0)--(T1)--(p1)--(T2)--(p2)--(T3)--cycle;
+    \draw[auxiliaryedge] (T1)--(p3);
+    \draw[auxiliaryedge] (T2)--(p4);
+    \draw[auxiliaryedge] (T3)--(p5);
+    \node[align=center,font=\scriptsize] at (0,-3.2)
+      {red: already paired with \(0\)\quad green: available old point};
+  \end{scope}
+
+  \begin{scope}[shift={(3.35,0)}]
+    \node[font=\small\bfseries] at (0,2.35)
+      {(b) final block through \(0\)};
+
+    \node[blocknode] (R1) at (0,0.95) {$R$};
+    \node[pointnode,fill=yellow!22,draw=yellow!55!black] (q0) at (-1.25,0.95) {$0$};
+    \node[pointnode,fill=green!10,draw=green!50!black] (q4) at (0,1.85) {$4$};
+    \node[pointnode] (q6) at (1.25,0.95) {$6$};
+    \draw[auxiliaryedge] (q0)--(R1)--(q4);
+    \draw[auxiliaryedge] (R1)--(q6);
+    \node[font=\small] at (0,0.35) {$\{0,4,6\}$};
+
+    \node[blocknode] (R2) at (0,-1.15) {$R$};
+    \node[pointnode,fill=yellow!22,draw=yellow!55!black] (r0) at (-1.25,-1.15) {$0$};
+    \node[pointnode] (r6) at (0,-2.05) {$6$};
+    \node[pointnode] (r7) at (1.25,-1.15) {$7$};
+    \draw[auxiliaryedge] (r0)--(R2)--(r6);
+    \draw[auxiliaryedge] (R2)--(r7);
+    \node[font=\small] at (0,-2.7) {$\{0,6,7\}$};
+  \end{scope}
+\end{tikzpicture}
+\caption{The forced triangle and its two normalized extensions. Here
+\(T_1=\{0,1,3\}\), \(T_2=\{1,2,4\}\), and
+\(T_3=\{0,2,5\}\). Linearity excludes \(1,2,3,5\) from the final block
+through \(0\), leaving either the old point \(4\) and one new point, or two
+new points.}
+\label{fig:triangle-roots}
+\end{figure}
+
 \begin{proof}
-The three triangle intersection points and the three remaining points of its
-blocks are distinct, so they may be labeled as displayed. Point \(0\) has
-already been paired with \(1,2,3,\) and \(5\). Linearity therefore forbids
-all four from its third block. Among the previously introduced points, only
-\(4\) remains available. The block consequently contains either \(4\) and
-one new point or two new points. First-occurrence labeling gives the two
-displayed forms. The rooted-triangle stabilizer makes all choices within
-each form equivalent.
+The three intersection points and the three remaining triangle points are
+distinct, so they may be labeled as in Figure~\ref{fig:triangle-roots}.
+The two existing blocks through \(0\) pair it with \(1,2,3,5\), which
+linearity excludes from its final block. The only available old point is
+\(4\). Thus the block contains either \(4\) and one new point or two new
+points. First-occurrence labeling gives \(6\), or \(6,7\), and the
+rooted-triangle stabilizer makes all choices within each form equivalent.
 \end{proof}
 
 \paragraph{Restricted-growth extension.}
@@ -521,6 +641,9 @@ block permutation from every labeled state to one of six representatives.
 
 \input{tables/triangle_kernels.tex}
 
+In the table and in Figure~\ref{fig:compatibility-forests}, isolated deficient
+points are omitted from the displayed graph types.
+
 For one of these states, call a point \emph{deficient} when its degree is
 less than three. Form a graph on the deficient points by joining \(x\) and
 \(y\) precisely when they do not already share a block and the old incidence
@@ -532,6 +655,69 @@ three pairs are compatible: an old shared block gives a \(C_4\), while an
 old path of length \(6\) or \(14\) is closed by the new block into a \(C_8\)
 or \(C_{16}\), respectively. A legal new block therefore requires a triangle
 in the compatible-pair graph.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+  \newcommand{\compatstar}[2]{%
+    \begin{scope}[shift={(#1,#2)}]
+      \draw[semithick,blue!60!black] (0,0.24)--(-0.32,-0.24)
+        (0,0.24)--(0.32,-0.24);
+      \node[compatnode] at (0,0.24) {};
+      \node[compatnode] at (-0.32,-0.24) {};
+      \node[compatnode] at (0.32,-0.24) {};
+    \end{scope}}
+  \newcommand{\compatedge}[2]{%
+    \begin{scope}[shift={(#1,#2)}]
+      \draw[semithick,blue!60!black] (-0.3,0)--(0.3,0);
+      \node[compatnode] at (-0.3,0) {};
+      \node[compatnode] at (0.3,0) {};
+    \end{scope}}
+
+  \begin{scope}[shift={(-3.8,1.15)}]
+    \draw[gray!35,rounded corners=2pt] (-1.6,-0.65) rectangle (1.6,1.1);
+    \node[font=\small] at (0,0.82) {$K_1:\ 3K_{1,2}$};
+    \compatstar{-1}{0}
+    \compatstar{0}{0}
+    \compatstar{1}{0}
+  \end{scope}
+  \begin{scope}[shift={(0,1.15)}]
+    \draw[gray!35,rounded corners=2pt] (-1.6,-0.65) rectangle (1.6,1.1);
+    \node[font=\small] at (0,0.82) {$K_2:\ K_2\sqcup2K_{1,2}$};
+    \compatedge{-1.05}{0}
+    \compatstar{0}{0}
+    \compatstar{1}{0}
+  \end{scope}
+  \begin{scope}[shift={(3.8,1.15)}]
+    \draw[gray!35,rounded corners=2pt] (-1.6,-0.65) rectangle (1.6,1.1);
+    \node[font=\small] at (0,0.82) {$K_3:\ K_2\sqcup2K_{1,2}$};
+    \compatedge{-1.05}{0}
+    \compatstar{0}{0}
+    \compatstar{1}{0}
+  \end{scope}
+
+  \begin{scope}[shift={(-3.8,-1.15)}]
+    \draw[gray!35,rounded corners=2pt] (-1.6,-0.65) rectangle (1.6,1.1);
+    \node[font=\small] at (0,0.82) {$K_4:\ 2K_{1,2}$};
+    \compatstar{-0.55}{0}
+    \compatstar{0.55}{0}
+  \end{scope}
+  \begin{scope}[shift={(0,-1.15)}]
+    \draw[gray!35,rounded corners=2pt] (-1.6,-0.65) rectangle (1.6,1.1);
+    \node[font=\small] at (0,0.82) {$K_5:\ K_{1,2}$};
+    \compatstar{0}{0}
+  \end{scope}
+  \begin{scope}[shift={(3.8,-1.15)}]
+    \draw[gray!35,rounded corners=2pt] (-1.6,-0.65) rectangle (1.6,1.1);
+    \node[font=\small] at (0,0.82) {$K_6:\ K_{1,2}$};
+    \compatstar{0}{0}
+  \end{scope}
+\end{tikzpicture}
+\caption{The compatibility graphs of the six terminal kernels, with isolated
+vertices omitted. Every displayed graph is a forest and therefore contains
+no triangle.}
+\label{fig:compatibility-forests}
+\end{figure}
 
 \begin{proposition}[Six deepest kernels]\label{prop:triangle-kernels}
 The \(337\) triangle-rooted states with \(19\) blocks form the six
@@ -547,13 +733,9 @@ states reconstructed from the two witness streams. The independent Python
 checker verifies that every point map and block map is a permutation and
 preserves every incidence. It then recomputes simple paths of lengths
 \(6\) and \(14\) for every pair of deficient points in each representative.
-The resulting compatible-pair graphs are
-\[
-3K_{1,2},\quad K_2\sqcup2K_{1,2},\quad
-K_2\sqcup2K_{1,2},\quad2K_{1,2},\quad K_{1,2},\quad K_{1,2}.
-\]
-All are triangle-free, so no representative admits another block within the
-\(29\)-point cap.
+This gives the forests in Figure~\ref{fig:compatibility-forests}; restoring
+the omitted isolated vertices preserves triangle-freeness. Hence no
+representative admits another block within the \(29\)-point cap.
 \end{proof}
 
 The six-class assertion remains a finite, certificate-backed computational

@@ -6,5 +6,6 @@ Python: 3.11.8
 NetworkX: 3.6.1
 nauty: 2.9.3
 TeX: pdfTeX 1.40.27 (TeX Live 2025)
+PGF/TikZ: 3.1.10
 Make: GNU Make 3.81
 Git: 2.50.1 (Apple Git-155)

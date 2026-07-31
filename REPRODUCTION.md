@@ -6,7 +6,7 @@
 - a C++17 compiler;
 - GNU Make;
 - NetworkX 3.6.1 for positive controls; and
-- pdfTeX for the paper build.
+- pdfTeX with PGF/TikZ for the paper build.
 
 Install the Python dependency with:
 
