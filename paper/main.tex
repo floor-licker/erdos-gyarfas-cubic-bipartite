@@ -49,7 +49,7 @@ Counterexamples to the Erd\H{o}s--Gy\'arf\'as Conjecture}
 \maketitle
 
 \begin{abstract}
-I give an exact exhaustive computation showing that every simple cubic
+I give a certified exhaustive computation showing that every simple cubic
 bipartite graph on at most \(58\) vertices contains a cycle of length
 \(4\), \(8\), or \(16\). Consequently, any cubic bipartite counterexample to
 the Erd\H{o}s--Gy\'arf\'as conjecture has at least \(60\) vertices. To my
@@ -60,18 +60,14 @@ Equivalently, the computation newly excludes all fifteen admissible orders
 \(30,32,\ldots,58\) beyond the published cubic frontier. Candidates are
 encoded as symmetric \(3\)-uniform, \(3\)-regular incidence structures. An
 edge-rooted Moore bound first forces a \(6\)-cycle, which becomes a Berge
-triangle. Up to its stabilizer there are two rooted extension orbits. Two
-separately written exact implementations exhaust both orbits under a
-universal cap of \(29\) points and agree on every counter and deterministic
-decision-transcript hash. The search visits \(21{,}493\) states and attempts
-\(1{,}762{,}368\) blocks. A separately written checker verifies two static
-witness streams, totaling \(218{,}728\) compressed bytes, that simultaneously
-exclude every side size at most \(29\). The \(337\) deepest surviving states
-form six explicitly certified color-preserving isomorphism classes, each
-having a triangle-free compatible-pair graph. A stronger arbitrary-root
-enumeration, which omits the Berge-triangle hypothesis, is retained as a
-cross-check. Source code, exact outputs, certificates, and reproduction
-materials accompany the paper.
+triangle. Up to its stabilizer there are two rooted extension orbits, and a
+restricted-growth search exhausts them under a universal cap of \(29\)
+points. A streaming verifier checks two certificate streams that cover every
+side size at most \(29\). The \(337\) deepest surviving states fall into six
+color-preserving isomorphism classes, each having a triangle-free
+compatible-pair graph. For comparison, the appendices record an earlier
+enumeration that omits the Berge-triangle hypothesis. Source code, outputs,
+certificates, and reproduction materials accompany the paper.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Erd\H{o}s--Gy\'arf\'as conjecture; cubic bipartite
@@ -193,21 +189,21 @@ relevant power-of-two lengths is already forced.
 
 \subsection{Proof architecture}
 
-The primary proof has an ordinary reduction and a computational finite
-lemma. A cubic bipartite graph is first represented as the Levi graph of a
-symmetric \(3\)-uniform, \(3\)-regular set system. An edge-rooted Moore bound
-then forces a \(C_6\), hence a Berge triangle. After normalizing that triangle,
-only two root orbits remain. A universal restricted-growth search with
-point cap \(29\) exhausts both orbits and recognizes a completed configuration
-as soon as all introduced points are cubic. Two certificate streams therefore
-cover the entire range \(v\leq29\) at once.
+The proof has two ingredients: a short structural reduction and a finite
+certified search. A cubic bipartite graph is first represented as the Levi
+graph of a symmetric \(3\)-uniform, \(3\)-regular set system. An edge-rooted
+Moore bound then forces a \(C_6\), hence a Berge triangle. After normalizing
+that triangle, only two root orbits remain. A universal restricted-growth
+search with point cap \(29\) exhausts both orbits and recognizes a completed
+configuration as soon as all introduced points are cubic. The resulting
+certificate covers the entire range \(v\leq29\) at once.
 
 Section~\ref{sec:triangle-rooted} gives the primary proof immediately after
-the incidence translation. The earlier arbitrary-point-rooted computation is
-retained in Appendices~\ref{app:arbitrary-generation}
-and~\ref{app:arbitrary-certificate}. It proves the stronger finite statement
-obtained by omitting the Berge-triangle hypothesis and provides a larger,
-structurally correlated cross-check.
+the incidence translation. For comparison,
+Appendices~\ref{app:arbitrary-generation}
+and~\ref{app:arbitrary-certificate} record an earlier enumeration that omits
+the Berge-triangle hypothesis and provides a structurally correlated
+cross-check.
 
 \paragraph{Triangle-rooted reduction.}
 If a cubic bipartite graph on at most
@@ -222,11 +218,8 @@ of Theorem~\ref{thm:main} with no \(C_4,C_8,\) or \(C_{16}\) must contain a
 \(C_6\).  Under the incidence translation, it is consequently enough to
 exclude connected linear symmetric \(v_3\)-configurations with \(v\leq29\)
 that contain a Berge triangle but no Berge cycle of length \(4\) or \(8\).
-The triangle-rooted computation in Section~\ref{sec:triangle-rooted}
-certifies exactly this finite lemma. The separate arbitrary-root computation
-in Appendices~\ref{app:arbitrary-generation}
-and~\ref{app:arbitrary-certificate}, using the same restricted-growth
-framework, proves the stronger result without the Berge-triangle hypothesis.
+The certified search in Section~\ref{sec:triangle-rooted} excludes this
+finite case.
 
 \section{Incidence configurations and cycle translations}
 
@@ -444,28 +437,21 @@ points are cubic, the tree recognizes the completed configuration
 immediately, even if fewer than \(29\) points were introduced.
 \end{proof}
 
-\subsection{Two universal certificate streams}
+\subsection{Certified finite search}
 
 The direct implementation,
 \path{research/src/triangle_root_universal_search.cpp}, uses simple-path DFS
-for its \(C_{16}\) oracle. The separately written implementation
+for its \(C_{16}\) oracle. A second implementation,
 \path{research/src/triangle_root_universal_mitm.cpp} instead joins complete
 lists of \(7\)-edge half-paths. Both use \(29\) as a point cap and test for a
-completion whenever all introduced points have degree three. They agree on
-every counter and complete decision-transcript hash for the available root
-orbits: orbit \(1\) at \(v=7\), and both orbits at every
-\(v=8,\ldots,29\). Their cap-\(29\) totals are:
+completion whenever all introduced points have degree three. Their cap-\(29\)
+totals are:
 
 \input{tables/triangle_orbits.tex}
 
 The primary static certificate is
-\path{research/certificates/eg58_triangle_universal_two_streams.zip}. Its two
-members have \(8{,}247{,}745\) raw bytes and compress to \(218{,}728\) bytes;
-the ZIP SHA-256 is
-\[
-\code{ce772c8cc5175fa5754129cef95c80a80ac96dec2eccd751c80de5a604e99b67}.
-\]
-The separately written streaming checker reconstructs the appropriate
+\path{research/certificates/eg58_triangle_universal_two_streams.zip}.
+The streaming checker reconstructs the appropriate
 triangle root, every state, and every candidate. It recomputes structural
 rejections, validates positive \(C_8\) and \(C_{16}\) witnesses, recursively
 checks expansion records, and rejects any completed configuration. Crucially,
@@ -475,21 +461,21 @@ side size represented by its root orbit.
 
 \begin{proposition}[Certified universal triangle search]
 \label{prop:triangle-search}
-No connected linear symmetric \(v_3\)-configuration with \(v\leq29\) that
+The two searches were implemented separately and use different \(C_{16}\)
+oracles; they agree on every counter and transcript hash for both cap-\(29\)
+roots. A third streaming checker accepts both certificate streams with zero
+completions. Consequently, no connected linear symmetric
+\(v_3\)-configuration with \(v\leq29\) that
 contains a Berge triangle avoids Berge cycles of lengths \(4\) and \(8\).
 \end{proposition}
 
 \begin{proof}
-The command \path{make verify-certificate} compiles the streaming checker,
-accepts both universal streams, regenerates their raw bytes exactly, and
-requires zero completions. The same command verifies the conventional set of
-\(45\) per-side triangle-rooted streams as a cross-check. The two search
-implementations reproduce the counters in
-Table~\ref{tab:triangle-orbits} and the retained decision transcripts.
+The command \mbox{\code{make}\ \code{verify-certificate}} builds the checker,
+verifies both universal streams, and requires zero completions.
 
-The checker consumes the complete deterministic candidate schedule: each
+The checker follows the deterministic candidate schedule: each
 rejection has a condition or positive cycle witness checked directly, while
-every expansion recursively consumes the complete child stream. An induction
+every expansion recursively consumes its child stream. An induction
 over this recursion shows that an accepted stream accounts for every proposal
 in its rooted search tree. Malformed, truncated, trailing, counter-tampered,
 or witness-tampered streams are rejected. Accepted streams therefore close
@@ -509,8 +495,8 @@ Berge cycles of lengths \(4\) and \(8\), contradicting
 Proposition~\ref{prop:triangle-search}.
 \end{proof}
 
-Relative to the retained arbitrary-root proof, the certified search is
-smaller as follows.
+Compared with the earlier arbitrary-root enumeration, the triangle-rooted
+search is smaller as follows.
 
 \begin{table}[ht]
 \centering
@@ -521,22 +507,20 @@ smaller as follows.
 \toprule
 Measure & Arbitrary root & Triangle root & Reduction\\
 \midrule
+Root orbits & \(3\) & \(2\) & ---\\
 States & \(531{,}193\) & \(21{,}493\) & \(24.71\times\)\\
 Attempted blocks & \(51{,}088{,}500\) & \(1{,}762{,}368\) &
   \(28.99\times\)\\
-Theorem-supporting streams & \(66\) & \(2\) & \(33\times\)\\
-Certificate ZIP bytes & \(20{,}545{,}969\) & \(218{,}728\) &
-  \(93.93\times\)\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Six deepest kernels}
 
-The state-dumping checker reconstructs exactly \(337\) surviving states with
+The state-dumping checker reconstructs \(337\) surviving states with
 \(19\) blocks, the maximum depth attained by the triangle-rooted search.
 Every such state has already introduced all \(29\) points allowed by the cap.
-The retained mapping certificate supplies an explicit point permutation and
+The retained mapping certificate supplies a point permutation and
 block permutation from every labeled state to one of six representatives.
 
 \input{tables/triangle_kernels.tex}
@@ -554,7 +538,7 @@ or \(C_{16}\), respectively. A legal new block therefore requires a triangle
 in the compatible-pair graph.
 
 \begin{proposition}[Six deepest kernels]\label{prop:triangle-kernels}
-The \(337\) triangle-rooted states with \(19\) blocks form exactly the six
+The \(337\) triangle-rooted states with \(19\) blocks form the six
 color-preserving isomorphism classes in
 Table~\ref{tab:triangle-kernels}. On their existing \(29\)-point sets, none
 admits a twentieth block without creating a \(C_4,C_8,\) or \(C_{16}\) in
@@ -562,10 +546,10 @@ its Levi graph.
 \end{proposition}
 
 \begin{proof}
-The explicit mapping certificate is checked row by row against the \(337\)
+The mapping certificate is checked row by row against the \(337\)
 states reconstructed from the two witness streams. The independent Python
 checker verifies that every point map and block map is a permutation and
-preserves every incidence. It then recomputes exact simple paths of lengths
+preserves every incidence. It then recomputes simple paths of lengths
 \(6\) and \(14\) for every pair of deficient points in each representative.
 The resulting compatible-pair graphs are
 \[
@@ -586,7 +570,7 @@ remain covered directly by the two universal witness streams.
 The proof above is supplemented by checks at three different levels. The two
 triangle-rooted implementations agree decision by decision; an overlapping
 \code{genbg} comparison tests the restricted-growth generator against a
-different generator; and the stronger arbitrary-root enumeration in
+different generator; and the earlier arbitrary-root enumeration in
 Appendices~\ref{app:arbitrary-generation}
 and~\ref{app:arbitrary-certificate} removes the Berge-triangle hypothesis.
 
@@ -654,15 +638,12 @@ coverage through \(v=13\). It does not replace the completeness proof for
 
 \subsection{Certificate robustness tests}
 
-The certificate checker is deliberately strict about the proof-stream
-boundary. The triangle-rooted checker accepts the two universal streams and
-all \(45\) conventional per-side streams. Its regression tests present
-malformed, truncated, trailing, counter-tampered, and \(C_8\)- and
-\(C_{16}\)-witness-tampered streams. The arbitrary-root checker separately
-accepts its \(66\) unmodified proof streams and rejects the corresponding
-mutations. Neither checker silently accepts a prefix, trusts stored counters,
-or ignores invalid witness data. These tests exercise parser and verification
-logic; the coverage arguments remain mathematical.
+The checker rejects incomplete or altered certificate streams. For both
+certificate families, regression tests cover malformed, truncated, trailing,
+counter-tampered, and witness-tampered inputs. Neither checker accepts a
+prefix, trusts stored counters, or ignores invalid witness data. These tests
+exercise parser and verification logic; the coverage arguments remain
+mathematical.
 
 \subsection{Positive controls}
 
@@ -693,13 +674,13 @@ proof of the frontier.
 
 \subsection{What has and has not been established}
 
-The result establishes the exact statement in Theorem~\ref{thm:main}. It
+The result establishes Theorem~\ref{thm:main}. It
 does not prove the full Erd\H{o}s--Gy\'arf\'as conjecture and does not exclude
 an order-\(60\) counterexample. Side size \(30\) lies outside the verified
 range, so no bound of \(62\) is claimed.
 
-The generators are complete for nonexistence but are not
-nauty/Traces-style isomorph-free generation; rooted duplicates may remain.
+The enumeration is not nauty/Traces-style isomorph-free generation; rooted
+duplicates may remain.
 The two triangle-rooted implementations share
 Proposition~\ref{prop:triangle-coverage}, and the arbitrary-root
 implementations share Proposition~\ref{prop:complete}. Counter and transcript
@@ -708,7 +689,7 @@ coverage arguments. Each static checker reconstructs its restricted-growth
 tree rather than trusting a production generator, but necessarily implements
 the corresponding enumeration schedule.
 
-The six-kernel classification is also computational. Explicit bijections and
+The six-kernel classification is also computational. Recorded bijections and
 an independent checker make the finite claim auditable, but they do not
 replace the certificate-backed proof that these are all \(19\)-block states.
 The most valuable external checks would therefore be:
@@ -718,7 +699,7 @@ The most valuable external checks would therefore be:
   Moore reduction, triangle-root orbits, and restricted-growth completeness
   proofs;
 \item extension of the set-level \code{genbg} comparison beyond \(v=13\), or
-  a second complete generator based on normalized permutation pairs; and
+  a second generator based on normalized permutation pairs; and
 \item a substantially different full-range encoding, such as SAT/SMS with
   LRAT-capable proof logging.
 \end{enumerate}
@@ -731,36 +712,27 @@ unpublished computations, private censuses, or uncatalogued code may exist.
 
 The preprint is archived on Zenodo at
 \href{https://doi.org/10.5281/zenodo.21695513}
-{\code{DOI: 10.5281/zenodo.21695513}}. The archived Zenodo record is version
-\code{v1.0.0}. The public computational artifact, including source code,
-witness certificates, verification programs, logs, and reproduction
-instructions, is available from the accompanying
+{\code{DOI: 10.5281/zenodo.21695513}} as version \code{v1.0.0}. Source code,
+certificates, verification programs, logs, and reproduction instructions are
+available from the accompanying
 \href{https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite}
 {GitHub repository}. The immutable public review artifact is
 \href{https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1}
 {release \code{v1.0.0-rc1}}; it records the earlier arbitrary-root proof, and
-its annotated Git tag records the corresponding full commit SHA. The
-triangle-rooted source, two-stream certificate, conventional \(45\)-stream
-cross-check, kernel mappings, and reproduction command are retained in the
-current repository. The repository-root \path{SHA256SUMS} covers every
-tracked snapshot file other than the manifest itself. \path{README.md},
-\path{REPRODUCTION.md}, and \path{PROVENANCE.md} describe the layout, commands,
-and research provenance. The certificate directory contains both witness
-families, detached digests, metadata, and byte-level format specifications.
-The generators and streaming checkers are retained under
-\path{research/src/}; checked-in tests construct stream mutations at run time.
+the current repository additionally contains the triangle-rooted search,
+certificate, and kernel mappings. The repository-root \path{SHA256SUMS} and
+the files \path{README.md}, \path{REPRODUCTION.md}, and \path{PROVENANCE.md}
+document the snapshot, verification commands, and research provenance.
 
 \section{Conclusion}
 
-The Moore reduction and incidence translation reduce the finite
-cubic-bipartite problem to two triangle-rooted cap-\(29\) searches. Two exact
-implementations agree throughout the range, and two universal witness streams
-certify that neither tree contains a completion. The \(337\) deepest states
-collapse under explicit color-preserving maps to six cap-\(29\) terminal
-kernels.
-The retained arbitrary-root computation proves the stronger finite statement
-without assuming a Berge triangle and provides a second, larger check within
-the same restricted-growth framework. Subject to the stated
+The Moore reduction and incidence translation leave two triangle-rooted
+cap-\(29\) searches. The certified search rules out a completion in either
+orbit, and its \(337\) deepest states collapse to six terminal kernels with
+triangle-free compatibility graphs. For comparison,
+Appendices~\ref{app:arbitrary-generation}
+and~\ref{app:arbitrary-certificate} record an earlier enumeration that does
+not assume the presence of a Berge triangle. Subject to the stated
 computer-assistance qualifications, this proves that every simple cubic
 bipartite graph on at most \(58\) vertices contains a \(4\)-, \(8\)-, or
 \(16\)-cycle. The lower bound for any cubic bipartite counterexample is
@@ -783,17 +755,15 @@ retained code, logs, exact outputs, certificates, and mathematical arguments,
 rather than AI assertions, form the evidentiary basis, and a fuller
 activity-level account appears in \path{PROVENANCE.md}.
 
-\clearpage
 \appendix
 
-\section{Stronger arbitrary-root generation}
+\section{Arbitrary-root cross-check: generation}
 \label{app:arbitrary-generation}
 
-This appendix and the next retain the original arbitrary-point-rooted
-enumeration. They establish a stronger finite result than the primary proof
-needs: no Berge-triangle hypothesis is imposed. The triangle-rooted
-computation in Section~\ref{sec:triangle-rooted} uses the same
-restricted-growth invariant after a smaller normalized root.
+For comparison, this appendix and the next record the earlier
+arbitrary-point-rooted enumeration, which does not assume a Berge triangle.
+The triangle-rooted computation in Section~\ref{sec:triangle-rooted} uses the
+same restricted-growth invariant after a smaller normalized root.
 
 \subsection{Root normalization}
 
@@ -946,7 +916,7 @@ to the rooted star.  The incremental rejection tests preserve the absence of
 Proposition~\ref{prop:complete}.
 \end{proof}
 
-\section{Stronger arbitrary-root computation and certificate}
+\section{Arbitrary-root cross-check: computation and certificate}
 \label{app:arbitrary-certificate}
 
 \subsection{Search implementations and decision transcripts}
@@ -960,8 +930,8 @@ simplicity, and reaching the target too early causes rejection of that path.
 Its \(C_8\) oracle directly enumerates the three old blocks that, together
 with the proposal, could form a Berge quadrilateral.
 
-The second separately written implementation,
-\path{research/src/independent_mitm_root_orbit_search.cpp}, uses a different exact
+The second implementation,
+\path{research/src/independent_mitm_root_orbit_search.cpp}, uses a different
 formulation. A \(C_8\) is detected as an old simple path of length \(6\)
 between two proposed points. For a \(C_{16}\), the program enumerates simple
 \(7\)-edge half-paths from each endpoint. Two halves are joined only when
@@ -969,7 +939,7 @@ they have the same midpoint and their visited-vertex bit masks intersect
 exactly in that midpoint. This is equivalent to an old simple path of length
 \(14\).
 
-A third separately written implementation,
+A third implementation,
 \path{research/src/vector_mitm_root_orbit_verifier.cpp}, repeats the
 meet-in-the-middle formulation. Both meet-in-the-middle implementations use
 dynamically sized vectors for the complete half-path lists and for the lists
@@ -1000,7 +970,7 @@ elapsed-time reporting.
 
 The artifact includes
 \path{research/certificates/eg58_witness_certificates.zip}, its SHA-256
-metadata, a certificate generator, and a separately written streaming
+metadata, a certificate generator, and a streaming
 checker. The bundle contains \(66\) proof streams: the one available
 normalized root orbit at \(v=7\), both available orbits at \(v=8\), and all
 three orbits at every \(v=9,\ldots,29\).
@@ -1232,7 +1202,7 @@ Command & Wall time & Peak RSS\\
 \code{make verify-v29} & \(62\) s & \(141\) MiB\\
 \code{make verify-full} & \(99\) s & \(114\) MiB\\
 \code{make verify-transcripts} & \(153\) s & \(117\) MiB\\
-\code{make verify-certificate} & \(6\) s & \(127\) MiB\\
+\mbox{\code{make}\ \code{verify-certificate}} & \(6\) s & \(127\) MiB\\
 \code{make verify-triangle-search} & \(37\) s & \(117\) MiB\\
 \code{make verify-arbitrary-certificate} & \(16\) s & \(127\) MiB\\
 \code{make generate-certificates} & \(78\) s & \(127\) MiB\\
