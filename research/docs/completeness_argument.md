@@ -1,8 +1,9 @@
 # Restricted-growth completeness audit
 
 This note isolates the principal nonmechanical trust boundary of the
-certificates. The arbitrary-root proof is Proposition 10 of the paper; the
-triangle-rooted specialization is stated separately there.
+certificates. The paper gives the triangle-rooted coverage argument in its
+primary proof and the stronger arbitrary-root coverage argument in an
+appendix.
 
 ## Objects
 
