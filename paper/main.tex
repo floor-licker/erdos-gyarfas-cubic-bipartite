@@ -4,11 +4,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage{booktabs,longtable,tabularx}
-\usepackage{enumitem}
+\usepackage{booktabs,tabularx}
 \usepackage{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{positioning,calc}
 \usepackage{microtype}
 \usepackage{hyperref}
 
@@ -28,13 +26,9 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
 
-\newcommand{\cC}{\mathcal{C}}
 \newcommand{\cB}{\mathcal{B}}
 \newcommand{\cH}{\mathcal{H}}
-\newcommand{\N}{\mathbb{N}}
 \newcommand{\code}[1]{\texttt{#1}}
 
 \tikzset{
@@ -130,39 +124,22 @@ so \(|L|=|R|\) and \(|V(G)|\) is even.  Theorem~\ref{thm:main} excludes all
 possible orders through \(58\); the next possible order is \(60\).
 \end{proof}
 
-\subsection{Literature chronology and the comparison baseline}
+\subsection{Comparison with previous bounds}
 
-Markstr\"om's exhaustive computation, published in 2004, established the
-customary cubic lower bound \(n\geq30\): a cubic counterexample has at least
-\(30\) vertices~\cite{Markstrom2004}. This is the published cubic baseline
-used here.
-
-There is a source discrepancy concerning a 2011 computation for bipartite
-graphs.  The accessible proceedings abstract states a lower bound of \(30\)
-vertices~\cite{NowbandeganiEsfandiari2011}.  Later papers attribute a bound of
-\(32\) to the same work; this attribution appears, for example, in the
-claw-free literature~\cite{NowbandeganiEtAl2014} and in
-Hu--Shen~\cite{HuShen2024}.  In contrast, Hegde, Sandeep, and Shashank report
-the value \(30\)~\cite{HegdeSandeepShashank2025}.  I did not locate the underlying code or a public certificate, so I do not
-use the disputed value as an input to the proof.
-
-A public SAT/SAT-Modulo-Symmetries artifact subsequently reported that all
-graphs of minimum degree at least three on at most \(31\) vertices contain a
-power-of-two cycle, yielding the general bound \(n\geq32\)
-\cite{Balaji2026}.  The repository was created in June 2026, reached
-\(n\geq31\) on 18 June, and recorded the \(n\geq32\) result in commit
-\code{53502b0f} on 3 July 2026.  It provides source code, exhaustive outputs,
-and multiple cross-checks, but no complete end-to-end LRAT-style certificate
-for all dynamically introduced constraints.
-
-Accordingly, there are two useful comparisons:
+Markstr\"om's 2004 computation established the customary cubic lower bound
+\(n\geq30\)~\cite{Markstrom2004}. The accessible abstract of a 2011
+bipartite computation also states \(30\), although later sources attribute
+\(32\) to that work
+\cite{NowbandeganiEsfandiari2011,NowbandeganiEtAl2014,HuShen2024}. Separately,
+a public 2026 SAT/SAT-Modulo-Symmetries computation excludes all
+minimum-degree-three graphs through order \(31\), giving the more broadly
+applicable bound \(n\geq32\)~\cite{Balaji2026}. Table~\ref{tab:comparison}
+records both comparisons.
 
 \begin{table}[ht]
 \centering
 \small
-\caption{The two finite-order baselines used in this paper.  ``Increase''
-means the numerical change in the lower bound, not a count of newly excluded
-admissible orders.}
+\caption{Comparison with the previously applicable finite-order bounds.}
 \label{tab:comparison}
 \begin{tabularx}{\textwidth}{@{}Xcccl@{}}
 \toprule
@@ -172,30 +149,17 @@ cubic-bipartite orders\\
 Published cubic result (Markstr\"om, 2004)
   & \(n\geq30\) & \(n\geq60\) & \(30\)
   & \(30,32,\ldots,58\) (15 orders)\\
-Public minimum-degree-three computation (3 July 2026)
+Public minimum-degree-three computation (2026)
   & \(n\geq32\) & \(n\geq60\) & \(28\)
   & \(32,34,\ldots,58\) (14 orders)\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-The relevant chronology depends on the comparison class. Within the
-published literature identified here, the preceding finite-order improvement
-specific to cubic graphs is Markstr\"om's 2004 computation. More recently,
-the public minimum-degree-three computation recorded on 3 July 2026 advanced
-the general bound to \(32\), which also applies to cubic bipartite graphs.
-The intervening 2011 bipartite record is ambiguous: the accessible primary
-abstract states \(30\), whereas later secondary sources attribute \(32\) to
-the same work.
+Theorem~\ref{thm:main} also shows that one of the first three relevant
+power-of-two cycle lengths is forced; no \(32\)-cycle is needed.
 
-\begin{remark}
-Theorem~\ref{thm:main} is slightly stronger than a finite-order verification
-of the conjecture: it does not use the possibility of a \(32\)-cycle, even
-though such a cycle fits at the orders considered.  One of the first three
-relevant power-of-two lengths is already forced.
-\end{remark}
-
-\subsection{Proof architecture}
+\subsection{Proof outline}
 
 The proof has two ingredients: a short structural reduction and a finite
 certified search. A cubic bipartite graph is first represented as the Levi
@@ -205,29 +169,6 @@ that triangle, only two root orbits remain. A universal restricted-growth
 search with point cap \(29\) exhausts both orbits and recognizes a completed
 configuration as soon as all introduced points are cubic. The resulting
 certificate covers the entire range \(v\leq29\) at once.
-
-Section~\ref{sec:triangle-rooted} gives the primary proof immediately after
-the incidence translation. For comparison,
-Appendices~\ref{app:arbitrary-generation}
-and~\ref{app:arbitrary-certificate} record an earlier enumeration that omits
-the Berge-triangle hypothesis and provides a structurally correlated
-cross-check.
-
-\paragraph{Triangle-rooted reduction.}
-If a cubic bipartite graph on at most
-\(58\) vertices has no \(C_4,C_6,\) or \(C_8\), then its girth is at least
-\(10\).  The two nonbacktracking trees of depth four rooted at the endpoints
-of an edge would therefore contain
-\[
-  2(1+2+4+8+16)=62
-\]
-distinct vertices, a contradiction.  Thus a hypothetical graph in the range
-of Theorem~\ref{thm:main} with no \(C_4,C_8,\) or \(C_{16}\) must contain a
-\(C_6\).  Under the incidence translation, it is consequently enough to
-exclude connected linear symmetric \(v_3\)-configurations with \(v\leq29\)
-that contain a Berge triangle but no Berge cycle of length \(4\) or \(8\).
-The certified search in Section~\ref{sec:triangle-rooted} excludes this
-finite case.
 
 \section{Incidence configurations and cycle translations}
 
@@ -555,20 +496,16 @@ immediately, even if fewer than \(29\) points were introduced.
 
 \subsection{Certified finite search}
 
-The direct implementation,
-\path{research/src/triangle_root_universal_search.cpp}, uses simple-path DFS
-for its \(C_{16}\) oracle. A second implementation,
-\path{research/src/triangle_root_universal_mitm.cpp} instead joins complete
-lists of \(7\)-edge half-paths. Both use \(29\) as a point cap and test for a
-completion whenever all introduced points have degree three. Their cap-\(29\)
-totals are:
+One implementation uses simple-path DFS for its \(C_{16}\) oracle; a second
+joins complete lists of \(7\)-edge half-paths. Both use \(29\) as a point cap
+and test for a completion whenever all introduced points have degree three.
+Their cap-\(29\) totals are:
 
 \input{tables/triangle_orbits.tex}
 
-The primary static certificate is
-\path{research/certificates/eg58_triangle_universal_two_streams.zip}.
-The streaming checker reconstructs the appropriate
-triangle root, every state, and every candidate. It recomputes structural
+A static certificate contains one stream for each triangle-root orbit. The
+streaming checker reconstructs the appropriate root, every state, and every
+candidate. It recomputes structural
 rejections, validates positive \(C_8\) and \(C_{16}\) witnesses, recursively
 checks expansion records, and rejects any completed configuration. Crucially,
 completion is tested at the number of points actually introduced, rather
@@ -586,9 +523,6 @@ contains a Berge triangle avoids Berge cycles of lengths \(4\) and \(8\).
 \end{proposition}
 
 \begin{proof}
-The command \mbox{\code{make}\ \code{verify-certificate}} builds the checker,
-verifies both universal streams, and requires zero completions.
-
 The checker follows the deterministic candidate schedule: each
 rejection has a condition or positive cycle witness checked directly, while
 every expansion recursively consumes its child stream. An induction
@@ -610,26 +544,6 @@ becomes a Berge triangle. The absent \(C_8\) and \(C_{16}\) become absent
 Berge cycles of lengths \(4\) and \(8\), contradicting
 Proposition~\ref{prop:triangle-search}.
 \end{proof}
-
-Compared with the earlier arbitrary-root enumeration, the triangle-rooted
-search is smaller as follows.
-
-\begin{table}[ht]
-\centering
-\small
-\caption{Reduction obtained by rooting at a forced Berge triangle.}
-\label{tab:triangle-reduction}
-\begin{tabular}{lrrr}
-\toprule
-Measure & Arbitrary root & Triangle root & Reduction\\
-\midrule
-Root orbits & \(3\) & \(2\) & ---\\
-States & \(531{,}193\) & \(21{,}493\) & \(24.71\times\)\\
-Attempted blocks & \(51{,}088{,}500\) & \(1{,}762{,}368\) &
-  \(28.99\times\)\\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{Six deepest kernels}
 
@@ -742,44 +656,21 @@ The six forests explain the deepest terminal obstruction; branches terminating
 before \(19\) blocks remain covered directly by the two universal witness
 streams.
 
-\section{Cross-checks and positive controls}\label{sec:crosschecks}
+\section{Additional checks}\label{sec:crosschecks}
 
-The proof above is supplemented by checks at three different levels. The two
-triangle-rooted implementations agree decision by decision; an overlapping
-\code{genbg} comparison tests the restricted-growth generator against a
-different generator; and the earlier arbitrary-root enumeration in
-Appendices~\ref{app:arbitrary-generation}
-and~\ref{app:arbitrary-certificate} removes the Berge-triangle hypothesis.
+Agreement between the two triangle-rooted searches holds at the level of
+ordered decision-transcript hashes, not only aggregate counters. An earlier
+arbitrary-root enumeration, which does not assume a Berge triangle, also
+gives zero completions throughout \(v\leq29\). The repository contains the
+full outputs and verification tests for both computations.
 
-\subsection{Decision-transcript agreement and fresh reruns}
-
-The two triangle-rooted implementations agree for every available root orbit
-on every counter and transcript hash at each \(v=7,\ldots,29\). Their
-retained values are in
-\path{research/results/triangle_frontier_counts.tsv} and
-\path{research/results/triangle_transcript_hashes.tsv}.
-
-The two principal arbitrary-root implementations also agree for
-\(7\leq v\leq29\). At \(v=9,\ldots,29\), all three arbitrary-root source
-files reproduce the same per-orbit counters and complete decision-transcript
-hashes. At \(v=7,8\), the two implementations supporting those sizes agree.
-During preparation of this report, all of these comparisons were rerun on an
-ARM64 macOS system using Apple Clang 21.0.0. The fresh outputs are retained
-under \path{research/logs/}; the arbitrary-root digest table is
-\path{research/results/transcript_hashes.tsv}.
-
-\subsection{Set-level comparison with \texttt{genbg}}
-
-The cycle-oracle agreement does not by itself test coverage of the
-restricted-growth tree. For a generator-level check, the auxiliary program
-\path{research/src/restricted_growth_c4_census.cpp} retains the same root and
-restricted-growth augmentation rules but disables the \(C_8\) and \(C_{16}\)
-filters. For each \(v=7,\ldots,13\), it emits every completed connected
-linear symmetric \(v_3\)-configuration as a graph6 Levi graph. The outputs
-are canonically labelled while preserving the two color classes,
-deduplicated, and compared byte-for-byte with nauty 2.9.3 \code{genbg} output
-generated with exact degree three and at most one common neighbor on the
-block side \cite{McKayPiperno2014}.
+For a generator-level comparison, the \(C_8\) and \(C_{16}\) filters were
+disabled and all completed connected linear symmetric
+\(v_3\)-configurations were generated for \(v=7,\ldots,13\). After
+color-preserving canonical labeling and deduplication, the resulting graph6
+sets agree exactly with nauty 2.9.3 \code{genbg} output generated with degree
+three and at most one common neighbor on the block side
+\cite{McKayPiperno2014}.
 
 \begin{table}[ht]
 \centering
@@ -803,69 +694,29 @@ common number of color-preserving canonical graph6 records.}
 \end{tabular}
 \end{table}
 
-The canonical files and their SHA-256 hashes are stored under
-\path{research/results/genbg_crosscheck/}; the reproduction script requires
-exact equality of the actual graph6 sets, not merely equality of their
-cardinalities. The canonical counts also agree with the published census of
-Betten, Brinkmann, and Pisanski
-\cite{BettenBrinkmannPisanski2000}. Because the \code{genbg} side uses a
-substantially different generator, this overlap checks restricted-growth
-coverage through \(v=13\). It does not replace the completeness proof for
-\(v=14,\ldots,29\).
+The common canonical counts in Table~\ref{tab:genbg} also agree with the
+published census of Betten, Brinkmann, and Pisanski
+\cite{BettenBrinkmannPisanski2000}. This independent overlap checks the
+restricted-growth generator through \(v=13\); completeness beyond that range
+follows from Proposition~\ref{prop:triangle-coverage}.
 
-\subsection{Certificate robustness tests}
-
-The checker rejects incomplete or altered certificate streams. For both
-certificate families, regression tests cover malformed, truncated, trailing,
-counter-tampered, and witness-tampered inputs. Neither checker accepts a
-prefix, trusts stored counters, or ignores invalid witness data. These tests
-exercise the parser and verification logic.
-
-\subsection{Positive controls}
-
-Negative exhaustive output is useful only if the rejection oracles are also
-shown to accept and classify known valid partial structures. The artifact
-contains \(128\) symmetric \(19_3\) configurations whose incidence graphs
-avoid \(C_4\) and \(C_8\) but contain \(C_{16}\). Two algorithmically
-different checks were applied:
-
-\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.2em]
-\item NetworkX 3.6.1 elementary-cycle enumeration lists all simple cycles
-  through length \(16\);
-\item an exact subset-state transfer dynamic program separately decides the
-  existence of cycles of lengths \(4,8,\) and \(16\).
-\end{enumerate}
-
-Both methods classify all \(128\) inputs as
-\[
-  C_4\text{-free},\qquad C_8\text{-free},\qquad C_{16}\text{-containing}.
-\]
-A supplementary permutation-model check decomposes the first incidence graph
-into three perfect matchings, normalizes one matching to the identity, and
-obtains the same cycle decisions by reduced color-word simulation. These are
-positive controls for cycle detection; they are not an additional exhaustive
-proof of the frontier.
-
-The certified range ends at side size \(29\), so the result neither excludes
-an order-\(60\) counterexample nor proves the full conjecture. The paired
-implementations and static checkers share the mathematical coverage arguments
-in Propositions~\ref{prop:triangle-coverage} and~\ref{prop:complete}; the
-six-kernel classification is likewise a finite, certificate-backed
-computation. An independent audit of those arguments or a substantially
-different full-range encoding would provide a useful further check.
+As positive controls, two independent cycle enumerators were applied to
+\(128\) symmetric \(19_3\)-configurations known to avoid \(C_4\) and \(C_8\)
+while containing \(C_{16}\); both classified every input correctly. The
+primary implementations and certificate checker still share the mathematical
+coverage argument in Proposition~\ref{prop:triangle-coverage}. The computation
+does not examine side size \(30\), and hence does not exclude an order-\(60\)
+counterexample.
 
 \section{Conclusion}
 
 The Moore reduction and incidence translation leave two triangle-rooted
 cap-\(29\) searches. The certified search rules out a completion in either
 orbit, and its \(337\) deepest states collapse to six terminal kernels with
-triangle-free compatibility graphs. For comparison,
-Appendices~\ref{app:arbitrary-generation}
-and~\ref{app:arbitrary-certificate} record an earlier enumeration that does
-not assume the presence of a Berge triangle. Together, these arguments prove
-that every simple cubic bipartite graph on at most \(58\) vertices contains a
-\(4\)-, \(8\)-, or \(16\)-cycle. The lower bound for any cubic bipartite
-counterexample is therefore \(60\).
+triangle-free compatibility graphs. Together, the structural reduction and
+certified enumeration prove that every simple cubic bipartite graph on at most
+\(58\) vertices contains a \(4\)-, \(8\)-, or \(16\)-cycle. The lower bound
+for any cubic bipartite counterexample is therefore \(60\).
 
 \section*{Artifact availability}
 
@@ -875,13 +726,8 @@ The preprint is archived on Zenodo at
 certificates, verification programs, logs, and reproduction instructions are
 available from the accompanying
 \href{https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite}
-{GitHub repository}. The immutable public review artifact is
-\href{https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1}
-{release \code{v1.0.0-rc1}}; it records the earlier arbitrary-root proof, and
-the current repository additionally contains the triangle-rooted search,
-certificate, and kernel mappings. The repository documents the archived
-snapshot, verification commands, and research provenance, and includes a
-complete SHA-256 manifest.
+{GitHub repository}, which also provides an immutable release, a complete
+SHA-256 manifest, and research-provenance documentation.
 
 \section*{AI disclosure}
 
@@ -899,403 +745,6 @@ directed the project and accepts responsibility for the final work; the
 retained code, logs, exact outputs, certificates, and mathematical arguments,
 rather than AI assertions, form the evidentiary basis, and a fuller
 activity-level account is included in the repository.
-
-\appendix
-
-\section{Arbitrary-root cross-check: generation}
-\label{app:arbitrary-generation}
-
-For comparison, this appendix and the next record the earlier
-arbitrary-point-rooted enumeration, which does not assume a Berge triangle.
-The triangle-rooted computation in Section~\ref{sec:triangle-rooted} uses the
-same restricted-growth invariant after a smaller normalized root.
-
-\subsection{Root normalization}
-
-Fix a point called \(0\).  In a \(C_4\)-free candidate, the three blocks
-through \(0\) contain six distinct other points: if two of the blocks reused
-another point, Lemma~\ref{lem:c4} would give a \(C_4\).  The points can
-therefore be relabeled so that the rooted star is
-\begin{equation}\label{eq:root-star}
-  \{0,1,2\},\qquad \{0,3,4\},\qquad \{0,5,6\}.
-\end{equation}
-In particular, every \(C_4\)-free cubic incidence structure has \(v\geq7\).
-
-After fixing \eqref{eq:root-star}, point \(1\) requires two further incident
-blocks.  The first such block has one of three forms.
-
-\begin{lemma}[Root-stabilizer orbits]\label{lem:root-orbits}
-Up to a permutation that fixes \(0\) and \(1\) and preserves the rooted star
-in \eqref{eq:root-star}, the lexicographically first additional block through
-point \(1\) has exactly one of the following representatives:
-\[
-  \{1,3,5\},\qquad
-  \{1,3,7\},\qquad
-  \{1,7,8\}.
-\]
-\end{lemma}
-
-\begin{proof}
-Of the two still-uninserted target blocks through \(1\), choose first one
-having the greatest number of points already present in the root star.  This
-is the block that can be made lexicographically first, because every old
-label is smaller than every subsequently assigned label.
-
-It cannot contain point \(2\), because the pair \(\{1,2\}\) already occurs.
-Nor can it contain both points from \(\{3,4\}\), or both from \(\{5,6\}\),
-since either choice repeats a pair from the root star.  Thus its two
-positions other than \(1\) contain: two old points, one from each of the other
-root pairs; one old point and one new point; or two new points.
-
-The permitted root stabilizer fixes \(0,1,2\), may interchange the rooted
-blocks \(\{0,3,4\}\) and \(\{0,5,6\}\), and may swap the two nonroot points
-within either block.  It therefore sends the old entries in the three cases
-to \(3,5\), to \(3\), or to no old entry, respectively.  Assigning the first
-new labels as \(7,8\) gives
-\(\{1,3,5\},\{1,3,7\},\{1,7,8\}\).  In the first case, any second two-old
-block uses the unused members of the two root pairs and is lexicographically
-later; in the second case, the old entry of any other one-old block can be
-given a larger root-star label; and a block with fewer old entries is later
-automatically.  Hence the selected representative is compatible with the
-generator's lexicographic order.  The three cases have different numbers of
-old points and so are distinct orbits.
-\end{proof}
-
-\subsection{The augmentation rule}\label{subsec:arbitrary-augmentation}
-
-At a partial state, labels \(0,\ldots,m-1\) have been introduced.  The state
-stores the ordered list of blocks, each point degree, and the set of point
-pairs already used.  The next augmentation is chosen as follows.
-
-\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.2em]
-\item Choose the least introduced point \(p\) whose current degree is below
-  three.
-\item Add the remaining blocks through \(p\) in lexicographic order.  Write a
-  proposed block as \(\{p,q,r\}\), where \(p<q<r\).
-\item Existing choices for \(q,r\) must have labels greater than \(p\), degree
-  below three, and must not repeat a used pair with \(p\).
-\item A point encountered for the first time receives label \(m\).  If the
-  same block introduces two points, they receive labels \(m,m+1\).  Thus
-  \(m+1\) may occur only together with \(m\).
-\item Reject the proposal if it violates a degree or linearity constraint, or
-  if it creates a \(C_8\) or \(C_{16}\) according to
-  Lemmas~\ref{lem:c8} and~\ref{lem:c16}.  Otherwise insert it and recurse.
-\end{enumerate}
-
-The lexicographic lower bound for successive blocks through the same point
-prevents permutations of those blocks from generating separate branches.
-The remaining normalization is a restricted-growth convention, not a
-canonical labeling under the full graph isomorphism group.
-
-\begin{proposition}[Completeness]\label{prop:complete}
-For each \(v\), every connected linear \(3\)-uniform, \(3\)-regular incidence
-structure on \(v\) points whose incidence graph has no \(C_8\) or \(C_{16}\)
-occurs in at least one branch of the three-orbit restricted-growth search.
-\end{proposition}
-
-\begin{proof}
-Take such a structure and choose a root point.  Normalize its three incident
-blocks as in \eqref{eq:root-star}.  By Lemma~\ref{lem:root-orbits}, relabel the
-first remaining block through point \(1\) to one of the three orbit
-representatives.
-
-I construct a branch while simultaneously assigning labels not yet fixed.
-Immediately before processing a point \(p\), maintain the following
-induction invariant:
-
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item every target block whose least-labelled point is less than \(p\) has
-  been inserted;
-\item all target blocks already inserted through \(p\) form a
-  lexicographically initial segment of all target blocks through \(p\); and
-\item the introduced labels are exactly \(0,\ldots,m-1\), in
-  first-occurrence order.
-\end{enumerate}
-
-The normalized root and first block establish this invariant at \(p=1\).
-Let \(B\) be the first target block through \(p\) not yet inserted.
-Every target block containing \(p\) and a smaller point was inserted when
-that smaller point was processed, by (i).  Consequently the other two points
-of \(B\) are greater than \(p\).
-
-Whenever \(B\) contains a point not encountered earlier, assign it the next
-unused label; if two new points occur, assign the two consecutive unused
-labels in either fixed order.  The proposal is therefore among the
-generator's choices and is later than the preceding block through \(p\).
-Inserting it preserves (ii) and (iii).  The target is linear and has no
-\(C_8\) or \(C_{16}\), so no target block is removed by a rejection test.
-Once the degree of \(p\) reaches three, advance to the least unfinished
-introduced point.  Then (ii) for \(p\) becomes (i) for the next point, so the
-invariant continues by induction.
-
-It remains to see that every target point is eventually introduced.  If the
-introduced vertices formed a proper subset closed under all incident blocks,
-the incidence graph would have no edge from that subset to its complement,
-contrary to connectedness.  Thus the process introduces every point and
-eventually inserts all target blocks.  The resulting labeled path is present
-in one of the search branches.
-\end{proof}
-
-\begin{remark}\label{rem:not-isofree}
-Proposition~\ref{prop:complete} is a coverage statement, not a uniqueness
-statement.  Multiple rooted labelings of one unrooted graph may survive.  A
-zero-completion result needs only that every candidate occur at least once.
-Accordingly, none of the state counters below is described as a count of
-nonisomorphic graphs.
-\end{remark}
-
-\begin{lemma}[Leaf condition]\label{lem:leaf}
-At a completed search leaf, the generated incidence graph is connected,
-simple, cubic, bipartite, and contains no \(C_4,C_8,\) or \(C_{16}\).
-Conversely, every graph covered by Proposition~\ref{prop:complete} reaches
-such a leaf.
-\end{lemma}
-
-\begin{proof}
-At a leaf there are \(v\) introduced points, \(v\) triples, and every point
-has degree three.  Each triple has size three, and pair uniqueness gives
-\(C_4\)-freeness by Lemma~\ref{lem:c4}.  Every new point was first introduced
-in a block containing an old point, so the incidence graph remains connected
-to the rooted star.  The incremental rejection tests preserve the absence of
-\(C_8\) and \(C_{16}\).  The converse is the conclusion of
-Proposition~\ref{prop:complete}.
-\end{proof}
-
-\section{Arbitrary-root cross-check: computation and certificate}
-\label{app:arbitrary-certificate}
-
-\subsection{Search implementations and decision transcripts}
-
-The discovery implementation,
-\path{research/src/canonical_root_orbit_search.cpp}, tests a proposed block for a
-\(C_{16}\) by depth-first enumeration of simple paths. For each of the three
-point pairs in the block, it asks whether the old incidence graph has a
-simple path of exactly \(14\) edges. A visited-vertex array enforces
-simplicity, and reaching the target too early causes rejection of that path.
-Its \(C_8\) oracle directly enumerates the three old blocks that, together
-with the proposal, could form a Berge quadrilateral.
-
-The second implementation,
-\path{research/src/independent_mitm_root_orbit_search.cpp}, uses a different
-formulation. A \(C_8\) is detected as an old simple path of length \(6\)
-between two proposed points. For a \(C_{16}\), the program enumerates simple
-\(7\)-edge half-paths from each endpoint. Two halves are joined only when
-they have the same midpoint and their visited-vertex bit masks intersect
-exactly in that midpoint. This is equivalent to an old simple path of length
-\(14\).
-
-A third implementation,
-\path{research/src/vector_mitm_root_orbit_verifier.cpp}, repeats the
-meet-in-the-middle formulation. Both meet-in-the-middle implementations use
-dynamically sized vectors for the complete half-path lists and for the lists
-grouped by midpoint. Neither imposes a global or per-midpoint capacity, and
-no enumerated half-path is truncated.
-
-The programs also emit a versioned deterministic transcript digest for each
-side size and root orbit. The serialization records every recursive state,
-including the ordered partial block family; every attempted candidate block;
-its accept/reject outcome and rejection class; and terminal and return
-markers. A small portable SHA-256 implementation is checked against the
-standard empty-string and \code{abc} test vectors before transcript
-reproduction. The two principal programs produce identical digests for
-\(v=7,\ldots,29\); the third produces the same digests throughout its
-supported range \(v=9,\ldots,29\). The agreed digests and event counts are
-retained in \path{research/results/transcript_hashes.tsv}. Thus the agreement
-is at the level of ordered search decisions, not merely aggregate counters.
-
-The implementations differ at the source-code and \(C_{16}\)-oracle levels.
-All accept/reject decisions use exact integers, arrays, and bit masks.
-Floating-point arithmetic appears only in elapsed-time reporting.
-
-\subsection{A full-range static witness certificate}\label{subsec:certificate}
-
-The artifact includes
-\path{research/certificates/eg58_witness_certificates.zip}, its SHA-256
-metadata, a certificate generator, and a streaming
-checker. The bundle contains \(66\) proof streams: the one available
-normalized root orbit at \(v=7\), both available orbits at \(v=8\), and all
-three orbits at every \(v=9,\ldots,29\).
-
-For each stream, the checker reconstructs the normalized root, every partial
-block family, and every candidate block in deterministic restricted-growth
-order. A candidate that fails a degree or pair condition is rejected directly
-by the checker and consumes no certificate record. Every other candidate is
-represented by exactly one of the following records:
-
-\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
-\item three old-block indices whose intersections with the proposed block
-  witness a Berge quadrilateral, hence a \(C_8\);
-\item an endpoint pair and seven old-block indices witnessing a simple old
-  path of length \(14\), which the proposed block closes into a \(C_{16}\);
-  or
-\item an expansion record, after which the checker recursively reconstructs
-  the complete child subtree.
-\end{enumerate}
-
-Only positive cycle claims require witnesses. The checker need not certify
-that an expanded candidate is cycle-free: expanding an additional forbidden
-branch only enlarges the tree being exhausted. It rejects any invalid
-witness, malformed or truncated stream, inconsistent counter, trailing data,
-or expanded branch reaching a complete configuration.
-
-\begin{proposition}[Soundness of the witness checker]\label{prop:certificate}
-If the streaming checker accepts a certificate stream for a normalized root
-orbit at side size \(v\), then that orbit contains no completed
-restricted-growth leaf.
-\end{proposition}
-
-\begin{proof}
-The checker itself regenerates every candidate at every visited state
-in the deterministic order prescribed in
-Section~\ref{subsec:arbitrary-augmentation}. Degree and pair
-failures are recomputed directly. A record of type~(i) is accepted only after
-the checker verifies the four distinct blocks and four distinct intersection
-points required by Lemma~\ref{lem:c8}. A record of type~(ii) is accepted only
-after it verifies a simple \(14\)-edge path between the stated endpoints, so
-Lemma~\ref{lem:c16} makes the rejection sound. A record of type~(iii) is
-accepted only after the entire child stream has been checked recursively.
-
-Induct on the recursive call tree. At each state, every candidate is either
-rejected for a condition verified by the checker or its complete child
-subtree is verified. The checker rejects immediately if a completed
-configuration is reached. Its end-of-stream and trailing-data checks ensure
-that no generated candidate or subtree can be silently omitted or ignored.
-Therefore acceptance closes every branch in the orbit and certifies that no
-completed leaf occurs there.
-\end{proof}
-
-All \(66\) streams verify, their per-side-size counters equal
-Table~\ref{tab:frontier-counts}, and every completion count is zero. At
-\(v=29\), the three streams contain witnesses for all \(34{,}098{,}891\)
-\(C_8\) rejections and all \(12{,}934{,}970\) \(C_{16}\) rejections. The
-complete deterministic ZIP is \(20{,}545{,}969\) bytes. A supplementary
-compatibility stream reproduces the semantic counters of the former
-\(v=16\), \(C_4/C_8\)-only text certificate.
-
-\paragraph{Certificate trust boundary.}
-The static bundle removes the production search programs and their cycle
-oracles from the certificate-checking trust base.
-
-\subsection{Range and counter semantics}
-
-The exhaustive range is
-\[
-  7\leq v=|X|=|Y|\leq29,
-\]
-which corresponds to graph orders \(14\) through \(58\). Side sizes below
-seven are disposed of by the root-star argument: a cubic \(C_4\)-free
-incidence graph would require the root plus six distinct points.
-
-For each side size, \emph{states} counts recursive search entries;
-\emph{attempted} counts proposed triples; \emph{pair/\(C_4\)} counts degree,
-pair-repetition, and linearity rejections; the next two columns count the
-\(C_8\)- and \(C_{16}\)-oracle rejections; and \emph{completions} counts
-fully cubic leaves. Timing is excluded because it has no logical role.
-
-\begingroup
-\small
-\input{tables/frontier_counts.tex}
-\endgroup
-
-\paragraph{Historical counters.}
-The larger \(v=7,\ldots,28\) counters from the initial research package are
-exactly reproduced by the same search in an unreduced-root mode, before
-quotienting the first augmentation by the root stabilizer. Appendix~\ref{app:historical}
-records the check. Table~\ref{tab:frontier-counts} is the sole full-range
-table used in the proof.
-
-At the frontier, the three root-stabilizer branches have the following
-separate totals.
-
-\input{tables/v29_orbits.tex}
-
-In particular, for \(v=29\) the computation visits \(531{,}193\) states,
-attempts \(51{,}088{,}500\) blocks, and produces no completion. The exact
-integer totals and all root-orbit transcript hashes agree across the
-implementations supporting those orbits.
-
-\begin{proposition}[Exhaustive computation]\label{prop:computation}
-For every side size \(v=7,\ldots,29\), the complete restricted-growth search
-has zero completions. The two principal implementations agree on every
-integer counter and deterministic root-orbit transcript hash for this entire
-range. The third implementation agrees on every counter and transcript hash
-throughout \(v=9,\ldots,29\). A separately written streaming checker also
-accepts a static witness stream for every available normalized root orbit in
-the full range.
-\end{proposition}
-
-\begin{proof}
-This is the code-dependent statement established by the supplied source
-files, result tables, retained logs, certificate streams, and reproduction
-scripts. The repository-root \path{SHA256SUMS} records the tracked release
-files. Running
-\path{research/scripts/reproduce_all_v7_v29.py} rebuilds the two principal
-programs for each side size and requires an exact diff of their counter
-tables. Running
-\path{research/scripts/reproduce_transcript_hashes.py} checks the SHA-256
-implementation, rebuilds every implementation at every supported side size,
-requires equality of each common per-orbit transcript and event count, and
-checks each side-size sum against the primary counter table. Running
-\path{research/scripts/reproduce_v29_all_orbits.py} rebuilds all three
-programs, executes each root orbit at \(v=29\), and requires exact agreement
-of the six integer counters and transcript hashes. Finally,
-\path{research/scripts/reproduce_witness_certificates.py} compiles the
-streaming checker, verifies all \(66\) full-range certificate streams, and
-requires their per-side-size totals to equal
-Table~\ref{tab:frontier-counts}. Proposition~\ref{prop:certificate} converts
-those accepted streams into a certificate of zero completed leaves.
-\end{proof}
-
-\section{Historical generation-mode check}\label{app:historical}
-
-The initial research package contained larger \(v=7,\ldots,28\) state and
-rejection totals. Their generation mode has been identified exactly: the
-search starts directly from the fixed root star~\eqref{eq:root-star}, before
-quotienting the next block through point \(1\) into the three
-root-stabilizer orbits of Lemma~\ref{lem:root-orbits}. It therefore traverses
-symmetric copies at the first augmentation while applying the same degree,
-pair, \(C_8\), and \(C_{16}\) rules.
-
-Both principal programs expose this historical mode as
-\code{--unreduced-root}. The script
-\path{research/scripts/verify_unreduced_root_counts.py} reproduces every
-integer entry in the canonical table
-\path{research/results/unreduced_root_counts.tsv} with both implementations.
-This diagnostic table is not primary evidence.
-
-\section{Reproducibility summary}\label{app:reproduction}
-
-Exact commands, expected outputs, and a complete SHA-256 release manifest
-are provided in the repository. Table~\ref{tab:resources} records one local
-run of each principal command. Measurements used a 10-core Apple M5 MacBook
-Pro with 16\,GB RAM, macOS 26.4, Apple Clang 21.0.0, and Python 3.11.8. The
-\code{genbg} comparison used nauty 2.9.3. Times and memory are approximate
-and have no logical role. The \code{genbg} timing is for a clean run including
-the pinned nauty download, configuration, and build.
-
-\begin{table}[ht]
-\centering
-\small
-\caption{Local reproduction resources.  Peak RSS is rounded to the nearest
-MiB.}
-\label{tab:resources}
-\begin{tabularx}{\textwidth}{@{}Xrr@{}}
-\toprule
-Command & Wall time & Peak RSS\\
-\midrule
-\code{make verify-v29} & \(62\) s & \(141\) MiB\\
-\code{make verify-full} & \(99\) s & \(114\) MiB\\
-\code{make verify-transcripts} & \(153\) s & \(117\) MiB\\
-\mbox{\code{make}\ \code{verify-certificate}} & \(6\) s & \(127\) MiB\\
-\code{make verify-triangle-search} & \(37\) s & \(117\) MiB\\
-\code{make verify-arbitrary-certificate} & \(16\) s & \(127\) MiB\\
-\code{make generate-certificates} & \(78\) s & \(127\) MiB\\
-\code{make verify-positive} & \(6\) s & \(39\) MiB\\
-\code{make verify-genbg} & \(58\) s & \(524\) MiB\\
-\code{make verify-unreduced} & \(78\) s & \(111\) MiB\\
-\bottomrule
-\end{tabularx}
-\end{table}
 
 \begin{thebibliography}{12}
 
