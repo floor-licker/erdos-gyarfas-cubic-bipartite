@@ -464,6 +464,7 @@ Up to the stabilizer of this rooted triangle, the final block through point
     \node[font=\small\bfseries] at (0,2.35)
       {(b) final block through \(0\)};
 
+    \begin{scope}[shift={(0,-0.18)}]
     \node[blocknode] (R1) at (0,0.95) {$R$};
     \node[pointnode,fill=yellow!22,draw=yellow!55!black] (q0) at (-1.25,0.95) {$0$};
     \node[pointnode,fill=green!10,draw=green!50!black] (q4) at (0,1.85) {$4$};
@@ -479,6 +480,7 @@ Up to the stabilizer of this rooted triangle, the final block through point
     \draw[auxiliaryedge] (r0)--(R2)--(r6);
     \draw[auxiliaryedge] (R2)--(r7);
     \node[font=\small] at (0,-2.7) {$\{0,6,7\}$};
+    \end{scope}
   \end{scope}
 \end{tikzpicture}
 \caption{The forced triangle and its two normalized extensions. Here
