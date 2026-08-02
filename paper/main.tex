@@ -9,7 +9,6 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{positioning,calc}
-\usepackage{listings}
 \usepackage{microtype}
 \usepackage{hyperref}
 
@@ -1244,59 +1243,6 @@ requires their per-side-size totals to equal
 Table~\ref{tab:frontier-counts}. Proposition~\ref{prop:certificate} converts
 those accepted streams into a certificate of zero completed leaves.
 \end{proof}
-
-\section{Restricted-growth pseudocode}\label{app:pseudocode}
-
-The following pseudocode suppresses data-structure details but preserves the
-logical branch conditions.  The three calls differ only in the normalized
-first block.
-
-\begin{lstlisting}[basicstyle=\ttfamily\small,frame=single,columns=fullflexible]
-SEARCH(v, first_block):
-    blocks := [{0,1,2}, {0,3,4}, {0,5,6}, first_block]
-    introduced := 7, 8, or 9 according to first_block
-    EXTEND(point = 1, previous = first_block)
-
-EXTEND(point, previous):
-    count.states += 1
-    while point < introduced and degree(point) = 3:
-        point += 1
-        previous := none
-
-    if point = v:
-        if number_of_blocks = v:
-            count.completions += 1
-        return
-
-    if point >= introduced or number_of_blocks >= v:
-        return
-
-    choices := eligible old labels greater than point
-    append the next unused label, if available
-    append the following unused label, if available
-
-    for each ordered pair q < r from choices:
-        require that a second fresh label occurs only with the first
-        require {q,r} to be lexicographically later than previous
-        count.attempted += 1
-        B := {point,q,r}
-
-        if B violates degree, pair uniqueness, or linearity:
-            count.pair += 1
-            continue
-        if B closes a C8:
-            count.c8 += 1
-            continue
-        if the old graph has a simple 14-path
-           between two points of B:
-            count.c16 += 1
-            continue
-
-        assign consecutive labels to fresh points in B
-        insert B
-        EXTEND(point, previous = (q,r))
-        remove B and undo fresh labels
-\end{lstlisting}
 
 \section{Historical generation-mode check}\label{app:historical}
 
