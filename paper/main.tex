@@ -877,9 +877,9 @@ available from the accompanying
 \href{https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1}
 {release \code{v1.0.0-rc1}}; it records the earlier arbitrary-root proof, and
 the current repository additionally contains the triangle-rooted search,
-certificate, and kernel mappings. The repository-root \path{SHA256SUMS} and
-the files \path{README.md}, \path{REPRODUCTION.md}, and \path{PROVENANCE.md}
-document the snapshot, verification commands, and research provenance.
+certificate, and kernel mappings. The repository documents the archived
+snapshot, verification commands, and research provenance, and includes a
+complete SHA-256 manifest.
 
 \section*{AI disclosure}
 
@@ -896,7 +896,7 @@ artifact or treated as independent evidence. Julius Tranquilli selected and
 directed the project and accepts responsibility for the final work; the
 retained code, logs, exact outputs, certificates, and mathematical arguments,
 rather than AI assertions, form the evidentiary basis, and a fuller
-activity-level account appears in \path{PROVENANCE.md}.
+activity-level account is included in the repository.
 
 \appendix
 
@@ -1263,11 +1263,10 @@ This diagnostic table is not primary evidence.
 
 \section{Reproducibility summary}\label{app:reproduction}
 
-Exact commands and expected outputs are maintained in
-\path{REPRODUCTION.md}; the root file \path{SHA256SUMS} is the complete
-release manifest.  Table~\ref{tab:resources} records one local run of each
-principal command.  Measurements used a 10-core Apple M5 MacBook Pro with
-16\,GB RAM, macOS 26.4, Apple Clang 21.0.0, and Python 3.11.8.  The
+Exact commands, expected outputs, and a complete SHA-256 release manifest
+are provided in the repository. Table~\ref{tab:resources} records one local
+run of each principal command. Measurements used a 10-core Apple M5 MacBook
+Pro with 16\,GB RAM, macOS 26.4, Apple Clang 21.0.0, and Python 3.11.8. The
 \code{genbg} comparison used nauty 2.9.3. Times and memory are approximate
 and have no logical role. The \code{genbg} timing is for a clean run including
 the pinned nauty download, configuration, and build.
