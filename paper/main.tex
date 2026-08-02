@@ -742,7 +742,7 @@ The six forests explain the deepest terminal obstruction; branches terminating
 before \(19\) blocks remain covered directly by the two universal witness
 streams.
 
-\section{Cross-checks and positive controls}
+\section{Cross-checks and positive controls}\label{sec:crosschecks}
 
 The proof above is supplemented by checks at three different levels. The two
 triangle-rooted implementations agree decision by decision; an overlapping
@@ -846,45 +846,28 @@ obtains the same cycle decisions by reduced color-word simulation. These are
 positive controls for cycle detection; they are not an additional exhaustive
 proof of the frontier.
 
-\section{Scope, limitations, and reproducibility}
+The certified range ends at side size \(29\), so the result neither excludes
+an order-\(60\) counterexample nor proves the full conjecture. The paired
+implementations and static checkers share the mathematical coverage arguments
+in Propositions~\ref{prop:triangle-coverage} and~\ref{prop:complete}; the
+six-kernel classification is likewise a finite, certificate-backed
+computation. An independent audit of those arguments or a substantially
+different full-range encoding would provide a useful further check.
 
-\subsection{What has and has not been established}\label{subsec:limitations}
+\section{Conclusion}
 
-The result establishes Theorem~\ref{thm:main}. It
-does not prove the full Erd\H{o}s--Gy\'arf\'as conjecture and does not exclude
-an order-\(60\) counterexample. Side size \(30\) lies outside the verified
-range, so no bound of \(62\) is claimed.
+The Moore reduction and incidence translation leave two triangle-rooted
+cap-\(29\) searches. The certified search rules out a completion in either
+orbit, and its \(337\) deepest states collapse to six terminal kernels with
+triangle-free compatibility graphs. For comparison,
+Appendices~\ref{app:arbitrary-generation}
+and~\ref{app:arbitrary-certificate} record an earlier enumeration that does
+not assume the presence of a Berge triangle. Together, these arguments prove
+that every simple cubic bipartite graph on at most \(58\) vertices contains a
+\(4\)-, \(8\)-, or \(16\)-cycle. The lower bound for any cubic bipartite
+counterexample is therefore \(60\).
 
-The enumeration is not nauty/Traces-style isomorph-free generation; rooted
-duplicates may remain.
-The two triangle-rooted implementations share
-Proposition~\ref{prop:triangle-coverage}, and the arbitrary-root
-implementations share Proposition~\ref{prop:complete}. Counter and transcript
-agreement alone cannot detect a mistake common to one of those mathematical
-coverage arguments. Each static checker reconstructs its restricted-growth
-tree rather than trusting a production generator, but necessarily implements
-the corresponding enumeration schedule.
-
-The six-kernel classification is also computational. Recorded bijections and
-an independent checker make the finite claim auditable, but they do not
-replace the certificate-backed proof that these are all \(19\)-block states.
-The most valuable external checks would therefore be:
-
-\begin{enumerate}[leftmargin=2.2em]
-\item an independent human audit, or proof-assistant formalization, of the
-  Moore reduction, triangle-root orbits, and restricted-growth completeness
-  proofs;
-\item extension of the set-level \code{genbg} comparison beyond \(v=13\), or
-  a second generator based on normalized permutation pairs; and
-\item a substantially different full-range encoding, such as SAT/SMS with
-  LRAT-capable proof logging.
-\end{enumerate}
-
-The novelty claim is similarly qualified. The \(60\)-vertex lower bound
-appears new relative to the public-source audit through 29 July 2026, but
-unpublished computations, private censuses, or uncatalogued code may exist.
-
-\subsection{Artifact availability}
+\section*{Artifact availability}
 
 The preprint is archived on Zenodo at
 \href{https://doi.org/10.5281/zenodo.21695513}
@@ -899,19 +882,6 @@ the current repository additionally contains the triangle-rooted search,
 certificate, and kernel mappings. The repository-root \path{SHA256SUMS} and
 the files \path{README.md}, \path{REPRODUCTION.md}, and \path{PROVENANCE.md}
 document the snapshot, verification commands, and research provenance.
-
-\section{Conclusion}
-
-The Moore reduction and incidence translation leave two triangle-rooted
-cap-\(29\) searches. The certified search rules out a completion in either
-orbit, and its \(337\) deepest states collapse to six terminal kernels with
-triangle-free compatibility graphs. For comparison,
-Appendices~\ref{app:arbitrary-generation}
-and~\ref{app:arbitrary-certificate} record an earlier enumeration that does
-not assume the presence of a Berge triangle. Together, these arguments prove
-that every simple cubic bipartite graph on at most \(58\) vertices contains a
-\(4\)-, \(8\)-, or \(16\)-cycle. The lower bound for any cubic bipartite
-counterexample is therefore \(60\).
 
 \section*{AI disclosure}
 
@@ -1134,10 +1104,8 @@ retained in \path{research/results/transcript_hashes.tsv}. Thus the agreement
 is at the level of ordered search decisions, not merely aggregate counters.
 
 The implementations differ at the source-code and \(C_{16}\)-oracle levels.
-Their common coverage assumptions are summarized in
-Section~\ref{subsec:limitations}. All accept/reject decisions use exact
-integers, arrays, and bit masks. Floating-point arithmetic appears only in
-elapsed-time reporting.
+All accept/reject decisions use exact integers, arrays, and bit masks.
+Floating-point arithmetic appears only in elapsed-time reporting.
 
 \subsection{A full-range static witness certificate}\label{subsec:certificate}
 
@@ -1206,8 +1174,7 @@ compatibility stream reproduces the semantic counters of the former
 
 \paragraph{Certificate trust boundary.}
 The static bundle removes the production search programs and their cycle
-oracles from the certificate-checking trust base. Its remaining assumptions
-are summarized in Section~\ref{subsec:limitations}.
+oracles from the certificate-checking trust base.
 
 \subsection{Range and counter semantics}
 
