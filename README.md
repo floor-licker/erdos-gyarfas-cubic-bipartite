@@ -10,8 +10,8 @@ Consequently, any cubic-bipartite counterexample to the Erdős–Gyárfás
 conjecture has at least 60 vertices. This does not exclude a counterexample
 on 60 vertices or prove the full conjecture.
 
-Earlier arbitrary-root review artifact:
-[`v1.0.0-rc1`](https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1).
+Current artifact release:
+[`v1.0.0`](https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0).
 
 Preprint DOI:
 [`10.5281/zenodo.21695513`](https://doi.org/10.5281/zenodo.21695513).
@@ -87,4 +87,4 @@ CC BY 4.0, and the paper remains copyright Julius Tranquilli. See
 
 Citation metadata is in [`CITATION.cff`](CITATION.cff). Cite the paper using
 the preprint DOI above and identify the exact Git commit used. The immutable
-`v1.0.0-rc1` release covers the earlier arbitrary-root artifact.
+`v1.0.0` release is the artifact version accompanying the paper.

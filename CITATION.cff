@@ -11,9 +11,9 @@ authors:
     given-names: Julius
     email: jtranqs@gmail.com
 repository-code: https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite
-url: https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0-rc1
-version: 1.0.0-rc1
-date-released: 2026-07-29
+url: https://github.com/floor-licker/erdos-gyarfas-cubic-bipartite/releases/tag/v1.0.0
+version: 1.0.0
+date-released: 2026-08-02
 keywords:
   - Erdős–Gyárfás conjecture
   - graph theory
