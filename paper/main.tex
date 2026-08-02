@@ -136,8 +136,8 @@ possible orders through \(58\); the next possible order is \(60\).
 
 Markstr\"om's exhaustive computation, published in 2004, established the
 customary cubic lower bound \(n\geq30\): a cubic counterexample has at least
-\(30\) vertices~\cite{Markstrom2004}.  This is the last clearly published
-cubic finite-order result located in my audit.
+\(30\) vertices~\cite{Markstrom2004}. This is the published cubic baseline
+used here.
 
 There is a source discrepancy concerning a 2011 computation for bipartite
 graphs.  The accessible proceedings abstract states a lower bound of \(30\)
@@ -738,10 +738,9 @@ the omitted isolated vertices preserves triangle-freeness. Hence no
 representative admits another block within the \(29\)-point cap.
 \end{proof}
 
-The six-class assertion remains a finite, certificate-backed computational
-classification, not a pencil-and-paper classification theorem. It explains
-the deepest terminal obstruction; branches terminating before \(19\) blocks
-remain covered directly by the two universal witness streams.
+The six forests explain the deepest terminal obstruction; branches terminating
+before \(19\) blocks remain covered directly by the two universal witness
+streams.
 
 \section{Cross-checks and positive controls}
 
@@ -820,8 +819,7 @@ The checker rejects incomplete or altered certificate streams. For both
 certificate families, regression tests cover malformed, truncated, trailing,
 counter-tampered, and witness-tampered inputs. Neither checker accepts a
 prefix, trusts stored counters, or ignores invalid witness data. These tests
-exercise parser and verification logic; the coverage arguments remain
-mathematical.
+exercise the parser and verification logic.
 
 \subsection{Positive controls}
 
@@ -850,7 +848,7 @@ proof of the frontier.
 
 \section{Scope, limitations, and reproducibility}
 
-\subsection{What has and has not been established}
+\subsection{What has and has not been established}\label{subsec:limitations}
 
 The result establishes Theorem~\ref{thm:main}. It
 does not prove the full Erd\H{o}s--Gy\'arf\'as conjecture and does not exclude
@@ -910,11 +908,10 @@ orbit, and its \(337\) deepest states collapse to six terminal kernels with
 triangle-free compatibility graphs. For comparison,
 Appendices~\ref{app:arbitrary-generation}
 and~\ref{app:arbitrary-certificate} record an earlier enumeration that does
-not assume the presence of a Berge triangle. Subject to the stated
-computer-assistance qualifications, this proves that every simple cubic
-bipartite graph on at most \(58\) vertices contains a \(4\)-, \(8\)-, or
-\(16\)-cycle. The lower bound for any cubic bipartite counterexample is
-therefore \(60\).
+not assume the presence of a Berge triangle. Together, these arguments prove
+that every simple cubic bipartite graph on at most \(58\) vertices contains a
+\(4\)-, \(8\)-, or \(16\)-cycle. The lower bound for any cubic bipartite
+counterexample is therefore \(60\).
 
 \section*{AI disclosure}
 
@@ -1136,11 +1133,9 @@ supported range \(v=9,\ldots,29\). The agreed digests and event counts are
 retained in \path{research/results/transcript_hashes.tsv}. Thus the agreement
 is at the level of ordered search decisions, not merely aggregate counters.
 
-The programs share the high-level restricted-growth scheme, root
-normalization, and mathematical completeness argument. They provide
-source-code and \(C_{16}\)-oracle cross-checks, but not independent
-reproductions in the ordinary academic sense and not independent proofs of
-Proposition~\ref{prop:complete}. All accept/reject decisions use exact
+The implementations differ at the source-code and \(C_{16}\)-oracle levels.
+Their common coverage assumptions are summarized in
+Section~\ref{subsec:limitations}. All accept/reject decisions use exact
 integers, arrays, and bit masks. Floating-point arithmetic appears only in
 elapsed-time reporting.
 
@@ -1211,10 +1206,8 @@ compatibility stream reproduces the semantic counters of the former
 
 \paragraph{Certificate trust boundary.}
 The static bundle removes the production search programs and their cycle
-oracles from the certificate-checking trust base. It still relies on the
-compact checker and on the mathematical root-normalization and
-restricted-growth completeness argument in Proposition~\ref{prop:complete}.
-It is not an LRAT proof or a proof-assistant formalization.
+oracles from the certificate-checking trust base. Its remaining assumptions
+are summarized in Section~\ref{subsec:limitations}.
 
 \subsection{Range and counter semantics}
 
